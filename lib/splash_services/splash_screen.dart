@@ -9,38 +9,34 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
+class _SplashScreenState extends State<SplashScreen>{
 
-  AnimationController? _controller;
-  Animation<Color>? animation;
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  final colors = <TweenSequenceItem<Color>>[
-    TweenSequenceItem(tween: Tween<Color>(begin:Colors.red,end:Colors.blue),
-        weight: 1.0),
-    TweenSequenceItem(tween: Tween<Color>(begin: Colors.blue,end:Colors.green), weight: 1.0),
-    
 
-  ]
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xffffeec3),
+      backgroundColor: Color(0xff293329),
       body: SafeArea(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Lottie.network(
-
-                  "https://lottie.host/0700d1eb-386a-439c-9575-972bc68be6d7/RImRjs8p8D.json",
-                  width: screenWidth,
-                  height: screenHeight /4,
+                  "https://lottie.host/d948f6e8-a420-4793-818a-7db0eff1e61b/pS6E5OaiTA.json",
+                  width: 200 ,
+                  height:200,
                   fit: BoxFit.cover,
                 repeat: true,
               ),
+
             ),
           ],
         ),
