@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id:(context) => const SplashScreen(),
+        LoginScreen.id:(context) => const LoginScreen(),
       },
     );
   }

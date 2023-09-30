@@ -37,8 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^6.1.0
   lottie: ^2.6.0
+  video_player: ^2.7.2
 
 dev_dependencies:
+  flutter_native_splash: ^2.3.2
   flutter_test:
     sdk: flutter
 
@@ -48,6 +50,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+flutter_native_splash:
+  color:"#000000"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -62,8 +67,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assests/images/Fader.png
-    - assests/images/SplashBackground.png
+    - assets/video/Splash.mp4
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
