@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "764733105402",
+    "project_id": "iconicfeed-9cb86",
+    "storage_bucket": "iconicfeed-9cb86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764733105402:android:5a247382a9bd1410855543",
+        "android_client_info": {
+          "package_name": "com.example.real.real_estate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGF2Hj27Q2IDGj_Glo7gZMbPX8Y8eDJJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
