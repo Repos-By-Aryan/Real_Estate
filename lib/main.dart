@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Real Estate',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
+        fontFamily: 'Lato',
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffedf4ff)),
         useMaterial3: true,
       ),
       initialRoute: SplashScreen.id,

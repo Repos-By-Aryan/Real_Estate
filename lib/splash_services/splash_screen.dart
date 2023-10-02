@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _playVideo()async{
     _controller.play();
-    await Future.delayed(const Duration(milliseconds:3500));
+    await Future.delayed(const Duration(seconds: 4));
     Navigator.pushReplacementNamed(context, LoginScreen.id);
   }
 
