@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
       title: 'Real Estate',
       theme: ThemeData(
         fontFamily: 'Lato',
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffedf4ff)),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Color(0xffedf4ff)),
         useMaterial3: true,
       ),
       initialRoute: SplashScreen.id,

@@ -7,7 +7,7 @@ class SignInButton extends StatelessWidget {
   final String logo;
   final double width;
   final double height;
-  const SignInButton({super.key,required this.title,required this.logo, this.width = 200,this.height= 50});
+  const SignInButton({super.key,required this.title,required this.logo, this.width = 200,this.height=45});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +18,17 @@ class SignInButton extends StatelessWidget {
         color: Color(0xffedf4ff),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(logo,width: 40,height:30),
-          SizedBox(width: 10,),
-          Text(title,style: TextStyle(fontWeight: FontWeight.bold),),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(logo,width: 40,height:30),
+            SizedBox(width: 10,),
+            Text(title,style: TextStyle(fontWeight: FontWeight.bold),),
+          ],
+        ),
       ),
     );
   }
