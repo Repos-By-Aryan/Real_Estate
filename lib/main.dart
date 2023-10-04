@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/firebase_options.dart';
+import 'package:real_estate/home_screen.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'initial/one.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.id:(context) => const SplashScreen(),
         LoginScreen.id:(context) => const LoginScreen(),
+        HomeScreen.id:(context) => const HomeScreen(),
+        One.id:(context) => const One(),
       },
     );
   }

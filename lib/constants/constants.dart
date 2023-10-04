@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
+final Color grey = Color(0x71adb9d3);
 
-var heading = TextStyle(fontWeight: FontWeight.w900,fontSize: 23);
+var heading = TextStyle(fontWeight: FontWeight.w900,fontSize: 23,color: Colors.black);
 class SignInButton extends StatelessWidget {
   final String title;
   final String logo;
@@ -30,6 +31,24 @@ class SignInButton extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class RoundedButton extends StatelessWidget {
+  final String title;
+  const RoundedButton({super.key,required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      decoration: BoxDecoration(
+        color: grey,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      height: 50,
+      child: Center(child: Text(title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
     );
   }
 }

@@ -41,6 +41,7 @@ dependencies:
   firebase_core: ^2.16.0
   firebase_auth: ^4.10.0
   fluttertoast: ^8.2.2
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_native_splash: ^2.3.2
@@ -75,6 +76,7 @@ flutter:
     - assets/images/AppleIcon.png
     - assets/images/Logo.png
     - assets/video/Splash.mp4
+    - assets/images/one.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

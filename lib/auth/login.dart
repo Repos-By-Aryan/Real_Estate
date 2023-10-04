@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:real_estate/constants/constants.dart';
-import 'package:real_estate/splash_services/splash_services.dart';
 import 'package:real_estate/Utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,7 +43,6 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = false;
       });
       Utils().toastMessage(value.user!.email.toString());
-      var login = SplashServices().isLogin(context);
       // if(login){Navigator.pushNamed(context, PostScreen.id);}
     }).onError((error, stackTrace){
       setState(() {
