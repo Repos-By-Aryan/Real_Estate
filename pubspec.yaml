@@ -77,6 +77,8 @@ flutter:
     - assets/images/Logo.png
     - assets/video/Splash.mp4
     - assets/images/one.webp
+    - assets/images/two.jpg
+#    - lib/main.dart
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:real_estate/auth/login.dart';
-import 'package:real_estate/home_screen.dart';
 import 'package:real_estate/initial/one.dart';
 import 'package:video_player/video_player.dart';
 
@@ -38,6 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _playVideo()async{
     _controller.play();
     await Future.delayed(const Duration(seconds: 4));
+    // ignore: use_build_context_synchronously
     Navigator.pushReplacementNamed(context, One.id);
   }
 

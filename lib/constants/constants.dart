@@ -1,8 +1,7 @@
 
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-final Color grey = Color(0x71adb9d3);
+final Color grey = Color(0x80bebebe);
 
 var heading = TextStyle(fontWeight: FontWeight.w900,fontSize: 23,color: Colors.black);
 class SignInButton extends StatelessWidget {
@@ -18,7 +17,7 @@ class SignInButton extends StatelessWidget {
       width: width,
       height:height,
       decoration: BoxDecoration(
-        color: Color(0xffedf4ff),
+        color: Color(0xff606060),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
@@ -49,7 +48,7 @@ class RoundedButton extends StatelessWidget {
         color: grey,
         borderRadius: BorderRadius.circular(30),
       ),
-      height: 50,
+      height: 45,
       child: Center(child: Text(title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
     );
   }

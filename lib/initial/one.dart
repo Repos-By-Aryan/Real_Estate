@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home_screen.dart';
+import 'two.dart';
 
 class One extends StatelessWidget {
   static const String id = 'One';
   const One({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +21,12 @@ class One extends StatelessWidget {
         automaticallyImplyLeading: true,
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: InkWell(
                 onTap: () {
                   Navigator.pushReplacementNamed(context, HomeScreen.id);
                 },
-                child: RoundedButton(title: "skip")),
+                child: const RoundedButton(title: "skip")),
           ),
         ],
       ),
@@ -65,8 +67,8 @@ class One extends StatelessWidget {
                     constraints: const BoxConstraints.tightForFinite(),
                     width: screenWidth,
                     height: screenHeight * 0.65,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
                           image: AssetImage('assets/images/one.webp'),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.only(
@@ -78,11 +80,12 @@ class One extends StatelessWidget {
                   ),
                 ),
                   Padding(
-                    padding:  EdgeInsets.only(bottom: screenHeight*0.02),
+                    padding:  EdgeInsets.only(bottom: screenHeight*0.03),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: InkWell(
                         onTap: (){
+                          Navigator.pushNamed(context, Two.id);
                         },
                         child: Container(
                           width: screenWidth*0.65,
@@ -91,7 +94,7 @@ class One extends StatelessWidget {
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Center(
+                          child: const Center(
                             child:Text("Continue",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
                           ),
                         ),),
