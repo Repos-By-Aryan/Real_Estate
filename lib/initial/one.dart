@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
+import 'package:real_estate/home_screen.dart';
 
 class One extends StatelessWidget {
   static const String id = 'One';
@@ -18,9 +18,13 @@ class One extends StatelessWidget {
         ),
         automaticallyImplyLeading: true,
         actions: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: RoundedButton(title: "skip"),
+            child: InkWell(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, HomeScreen.id);
+                },
+                child: RoundedButton(title: "skip")),
           ),
         ],
       ),
@@ -54,18 +58,46 @@ class One extends StatelessWidget {
                   ]),
             ),
             Expanded(
-              child: Align(
-                alignment:Alignment.bottomCenter,
-                child: Container(
-                  constraints: const BoxConstraints.expand(),
-                  width: screenWidth,
-                  height: screenHeight*0.65,
-                  decoration: BoxDecoration(
-                    image:const DecorationImage(image: AssetImage('assets/images/one.jpg'),
-                    fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(30),
+              child: Stack(
+                children:[ Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    constraints: const BoxConstraints.tightForFinite(),
+                    width: screenWidth,
+                    height: screenHeight * 0.65,
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                          image: AssetImage('assets/images/one.webp'),
+                          fit: BoxFit.cover),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                    ),
                   ),
                 ),
+                  Padding(
+                    padding:  EdgeInsets.only(bottom: screenHeight*0.02),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: InkWell(
+                        onTap: (){
+                        },
+                        child: Container(
+                          width: screenWidth*0.65,
+                          height:50,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child:Text("Continue",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
+                          ),
+                        ),),
+                    ),
+                  ),
+                ]
               ),
             ),
           ],

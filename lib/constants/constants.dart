@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 final Color grey = Color(0x71adb9d3);
 

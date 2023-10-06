@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 class Utils{
