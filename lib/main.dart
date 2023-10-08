@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/firebase_options.dart';
 import 'package:real_estate/home_screen.dart';
+import 'package:real_estate/routes/routes.dart';
+import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,15 +37,16 @@ class MyApp extends StatelessWidget {
             seedColor: const Color(0xffedf4ff)),
         useMaterial3: true,
       ),
-      initialRoute: SplashScreen.id,
-      routes: {
-        SplashScreen.id:(context) => const SplashScreen(),
-        LoginScreen.id:(context) => const LoginScreen(),
-        HomeScreen.id:(context) => const HomeScreen(),
-        One.id:(context) => const One(),
-        Two.id:(context) => const Two(),
-        Three.id:(context) => const Three(),
-      },
+      initialRoute: RoutesName.splashScreen,
+      onGenerateRoute: Routes.generateRoute,
+      // routes: {
+      //   SplashScreen.id:(context) => const SplashScreen(),
+      //   LoginScreen.id:(context) => const LoginScreen(),
+      //   HomeScreen.id:(context) => const HomeScreen(),
+      //   One.id:(context) => const One(),
+      //   Two.id:(context) => const Two(),
+      //   Three.id:(context) => const Three(),
+      // },
     );
   }
 }
