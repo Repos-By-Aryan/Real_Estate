@@ -1,31 +1,11 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home_screen.dart';
-import 'three.dart';
 
-class Two extends StatefulWidget {
-  static const String id = 'Two';
-  const Two({super.key});
+class Three extends StatelessWidget {
+  static const String id = 'Three';
+  const Three({super.key});
 
-  @override
-  State<Two> createState() => _TwoState();
-}
-
-
-
-class _TwoState extends State<Two> {
-  bool isSecondTextVisible=false;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Future.delayed(Duration(milliseconds: 2500), () {
-      setState(() {
-        isSecondTextVisible = true;
-      });
-    });
-  }
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -54,35 +34,33 @@ class _TwoState extends State<Two> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: screenHeight*0.02,
+              height: screenHeight * 0.06,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnimatedTextKit(
-                  isRepeatingAnimation: false,
-                  displayFullTextOnTap: false,
-                  animatedTexts: [
-                    TyperAnimatedText(
-                      'Fast sell your property\n in just',
-                      textStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 30,
-                          color: Colors.black),
-                      speed: const Duration(milliseconds: 70),
+            RichText(
+              maxLines: 2,
+              text: const TextSpan(
+                  text: "Find ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 30,
+                      color: Colors.black),
+                  children: <TextSpan>[
+
+                    TextSpan(
+                      text: "perfect choice ",
+                      style: TextStyle(
+                        color: Color(0xff003d64),
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
-                  ],
-                ),
-                if (isSecondTextVisible)
-                  Text(
-                    'one click',
-                    style: TextStyle(
-                      color: Color(0xff003d64),
-                      fontWeight: FontWeight.w900,
-                      fontSize: 30.0,
-                    ),
-                  ),
-              ],
+                    TextSpan(
+                        text: "for\n",
+                        style: TextStyle(fontSize: 33, color: Colors.black)),
+                    TextSpan(
+                        text: "your future house",
+                        style: TextStyle(fontSize: 33, color: Colors.black)),
+                  ]
+              ),
             ),
             Expanded(
               child: Stack(
@@ -94,7 +72,7 @@ class _TwoState extends State<Two> {
                       height: screenHeight * 0.65,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/images/two.jpg'),
+                            image: AssetImage('assets/images/three.jpg'),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(50),
@@ -110,7 +88,7 @@ class _TwoState extends State<Two> {
                         alignment: Alignment.bottomCenter,
                         child: InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, Three.id);
+                            Navigator.pushReplacementNamed(context, HomeScreen.id);
                           },
                           child: Container(
                             width: screenWidth*0.65,

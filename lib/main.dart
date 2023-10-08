@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'initial/one.dart';
 import 'initial/two.dart';
+import 'initial/three.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.id:(context) => const HomeScreen(),
         One.id:(context) => const One(),
         Two.id:(context) => const Two(),
+        Three.id:(context) => const Three(),
       },
     );
   }

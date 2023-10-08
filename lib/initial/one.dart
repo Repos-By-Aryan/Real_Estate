@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+
 import 'two.dart';
 
-class One extends StatelessWidget {
+class One extends StatefulWidget {
   static const String id = 'One';
   const One({super.key});
 
+  @override
+  State<One> createState() => _OneState();
+}
+
+class _OneState extends State<One> {
+  bool isSecondTextVisible=false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(milliseconds: 2300), () {
+      setState(() {
+        isSecondTextVisible = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,28 +54,35 @@ class One extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: screenHeight * 0.06,
+              height: screenHeight*0.02,
             ),
-            RichText(
-              maxLines: 2,
-              text: const TextSpan(
-                  text: "Find best place\n",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 30,
-                      color: Colors.black),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: "to stay in ",
-                        style: TextStyle(fontSize: 33, color: Colors.black)),
-                    TextSpan(
-                      text: "good price",
-                      style: TextStyle(
-                        color: Color(0xff003d64),
-                        fontWeight: FontWeight.w900,
-                      ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AnimatedTextKit(
+                  isRepeatingAnimation: false,
+                  displayFullTextOnTap: false,
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      'Find best place\nto stay in',
+                      textStyle: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 30,
+                          color: Colors.black),
+                      speed: const Duration(milliseconds: 70),
                     ),
-                  ]),
+                  ],
+                ),
+                if (isSecondTextVisible)
+                  Text(
+                    'good price',
+                    style: TextStyle(
+                      color: Color(0xff003d64),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 30.0,
+                    ),
+                  ),
+              ],
             ),
             Expanded(
               child: Stack(
