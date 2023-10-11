@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/initial/one.dart';
+import 'package:real_estate/routes/routes_name.dart';
 import 'package:video_player/video_player.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _controller.play();
     await Future.delayed(const Duration(seconds: 4));
     // ignore: use_build_context_synchronously
-    Navigator.pushReplacementNamed(context, One.id);
+    Navigator.pushReplacementNamed(context, RoutesName.one);
   }
 
   @override

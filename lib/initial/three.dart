@@ -44,14 +44,17 @@ class Three extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 30,
+                      fontFamily: 'Lato',
                       color: Colors.black),
                   children: <TextSpan>[
 
                     TextSpan(
                       text: "perfect choice ",
                       style: TextStyle(
-                        color: Color(0xff003d64),
+                        color: Color(0xff234F68),
+                        fontFamily: 'Lato',
                         fontWeight: FontWeight.w900,
+
                       ),
                     ),
                     TextSpan(

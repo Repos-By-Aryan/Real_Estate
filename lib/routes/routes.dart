@@ -30,7 +30,7 @@ class Routes{
         return MaterialPageRoute(
           builder:(context) { return Scaffold(
             body: Center(child: Text("No route found"),),
-          ),}
+          );}
         );
     }
   }
