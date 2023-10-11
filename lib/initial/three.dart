@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home_screen.dart';
+import 'package:real_estate/routes/routes_name.dart';
 
 class Three extends StatelessWidget {
   static const String id = 'Three';
@@ -22,7 +23,7 @@ class Three extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, HomeScreen.id);
+                  Navigator.pushReplacementNamed(context, RoutesName.homeScreen);
                 },
                 child: const RoundedButton(title: "skip")),
           ),
@@ -55,10 +56,10 @@ class Three extends StatelessWidget {
                     ),
                     TextSpan(
                         text: "for\n",
-                        style: TextStyle(fontSize: 33, color: Colors.black)),
+                        style: TextStyle(fontSize: 30, color: Colors.black)),
                     TextSpan(
                         text: "your future house",
-                        style: TextStyle(fontSize: 33, color: Colors.black)),
+                        style: TextStyle(fontSize: 30, color: Colors.black)),
                   ]
               ),
             ),
@@ -88,7 +89,7 @@ class Three extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: InkWell(
                           onTap: (){
-                            Navigator.pushReplacementNamed(context, HomeScreen.id);
+                            Navigator.pushReplacementNamed(context, RoutesName.homeScreen);
                           },
                           child: Container(
                             width: screenWidth*0.65,

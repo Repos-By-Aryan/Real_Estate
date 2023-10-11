@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home_screen.dart';
+import 'package:real_estate/routes/routes_name.dart';
 import 'three.dart';
 
 class Two extends StatefulWidget {
@@ -42,7 +43,7 @@ class _TwoState extends State<Two> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, HomeScreen.id);
+                  Navigator.pushReplacementNamed(context, RoutesName.homeScreen);
                 },
                 child: const RoundedButton(title: "skip")),
           ),
@@ -64,7 +65,7 @@ class _TwoState extends State<Two> {
                   displayFullTextOnTap: false,
                   animatedTexts: [
                     TyperAnimatedText(
-                      'Fast sell your property\n in just',
+                      'Fast sell your property\nin just',
                       textStyle: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 30,
@@ -110,7 +111,7 @@ class _TwoState extends State<Two> {
                         alignment: Alignment.bottomCenter,
                         child: InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, Three.id);
+                            Navigator.pushNamed(context, RoutesName.three);
                           },
                           child: Container(
                             width: screenWidth*0.65,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:real_estate/routes/routes_name.dart';
 
 import 'two.dart';
 
@@ -42,7 +43,7 @@ class _OneState extends State<One> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, HomeScreen.id);
+                  Navigator.pushReplacementNamed(context, RoutesName.homeScreen);
                 },
                 child: const RoundedButton(title: "skip")),
           ),
@@ -110,7 +111,7 @@ class _OneState extends State<One> {
                       alignment: Alignment.bottomCenter,
                       child: InkWell(
                         onTap: (){
-                          Navigator.pushNamed(context, Two.id);
+                          Navigator.pushNamed(context, RoutesName.two);
                         },
                         child: Container(
                           width: screenWidth*0.65,
