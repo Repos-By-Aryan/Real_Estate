@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:real_estate/constants/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
@@ -200,6 +201,87 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                   ),
+                  SizedBox(
+                    height: screenHeight * 0.04,
+                  ),
+
+                    Container(
+                      height: 180,
+                      width: screenWidth,
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 2,
+                          itemBuilder: (context, index) {
+                            return Stack(
+                              fit: StackFit.passthrough,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 7),
+                                  width:screenWidth*0.8,
+                                  decoration:BoxDecoration(
+                                    image: DecorationImage(image: AssetImage('assets/images/one.webp'),fit: BoxFit.cover,),
+                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15),bottomRight: Radius.circular(15))
+                                  ),
+                                ),
+                                Positioned(
+                                  top:20,
+                                  left:20,
+                                  child:  Text("Halloween",style: TextStyle(
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                  ),),
+                                ),
+
+                                Positioned(
+                                  top:50,
+                                  left:20,
+                                  child:  Text("Sale!",style: TextStyle(
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                  ),),
+                                ),
+                                Positioned(
+                                  top:90,
+                                  left:20,
+                                  child:  Text("All discounts upto 60%",style: TextStyle(
+                                    fontFamily: 'Lato',
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),),
+                                ),
+                                Positioned(
+                                  bottom:0,
+                                  left:7,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xff234F68),
+                                      borderRadius: BorderRadius.only(topRight: Radius.circular(18),),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 7),
+                                      child: Center(child:Icon(Icons.arrow_right_alt,color: Colors.white,size:30,)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }),
+                    ),
+                  SizedBox(
+                    height: screenHeight * 0.04,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        Text('Featured Estates',style: subheading,),
+                      TextButton(onPressed: (){}, child: Text('View all',style:text)),
+                    ],
+                  )
                 ],
               ),
             ),
