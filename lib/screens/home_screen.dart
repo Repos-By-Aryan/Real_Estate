@@ -306,62 +306,98 @@ class _HomeScreenState extends State<HomeScreen> {
                     if(snapshot.hasError){
                       return const Text("An error occured.");
                     }
-                    return Container(
-                      constraints: BoxConstraints.expand(height: 180,width: screenWidth*0.8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(0xffF5F4F8),
-                      ),
+                    return SizedBox(
+                      height:180,
+                      width: double.infinity,
                       child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
                             final document = snapshot.data!.docs[index];
-                            return Stack(
-                              fit: StackFit.passthrough,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    width:(screenWidth*0.8)*0.48,
-                                    decoration:BoxDecoration(
-                                        image: DecorationImage(image: NetworkImage(document['image_urls'][0].toString()),fit: BoxFit.cover,),
-                                        borderRadius: BorderRadius.circular(20)),
-                                  ),
+                            return Container(
+                                constraints: BoxConstraints.expand(height: 180,width: screenWidth*0.8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xffF5F4F8),
                                 ),
-                                Positioned(
-                                  bottom:18,
-                                  left:18,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Color(0xff234F68),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 4),
-                                      child: Text(document['category'],style: TextStyle(
-                                        fontFamily: 'Lato',
-                                        color: Colors.white,
-                                        fontSize: 13,
+                              child: Row(
+                                children: [
+                                  Stack(
+                                    fit: StackFit.passthrough,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          width:(screenWidth*0.8)*0.48,
+                                          decoration:BoxDecoration(
+                                              image: DecorationImage(image: NetworkImage(document['image_urls'][0].toString()),fit: BoxFit.cover,),
+                                              borderRadius: BorderRadius.circular(20)),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom:18,
+                                        left:18,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Color(0xff234F68),
+                                            borderRadius: BorderRadius.circular(15),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 4),
+                                            child: Text(document['category'],style: TextStyle(
+                                              fontFamily: 'Lato',
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                            ),),
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                          top:18,
+                                          left:18,
+                                          child: SizedBox(
+                                        width:25,
+                                        height:25,
+                                        child:ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(30),
+                                            ),
+                                          ),
+                                          onPressed: () {  },
+                                          child:SvgPicture.asset(
+                                            'assets/svg/heart.svg',
+                                            width: 25,
+                                            height: 25,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),),
+
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: RichText(
+                                            maxLines: 2,
+                                            overflow: TextOverflow.visible,
+                                            text: TextSpan(
+                                              text: document['title'],
+                                              style: featuredTitle, // Define your style here
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ),
-                                Positioned(
-                                    top:18,
-                                    left:18,
-                                    child: SizedBox(
-                                  width:25,
-                                  height:25,
-                                  child: ElevatedButton(
-                                    onPressed: (){},
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                    ), child: ,
-                                  ),
-                                ))
-                              ],
+                                  )
+                                ],
+                              ),
                             );
                           }),
                     );

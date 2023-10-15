@@ -6,6 +6,7 @@ final Color grey = Color(0x80bebebe);
 var heading = TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w900,fontSize: 23,color: Colors.black);
 var subheading = TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w700,fontSize: 23,color:Color(0xff234F68) );
 var text = TextStyle(fontFamily:'Lato',color:Color(0xff234F68),fontSize: 15);
+var featuredTitle = TextStyle(fontFamily: 'Lato',color: Color(0xFF252B5C),fontSize: 20,fontWeight: FontWeight.w700);
 class SignInButton extends StatelessWidget {
   final String title;
   final String logo;
