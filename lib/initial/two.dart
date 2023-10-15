@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
-import 'package:real_estate/home_screen.dart';
+import 'package:real_estate/screens/home_screen.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'three.dart';
 
@@ -90,7 +90,7 @@ class _TwoState extends State<Two> {
                   children:[ Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      constraints: const BoxConstraints.tightForFinite(),
+                      constraints: const BoxConstraints.tightFor(),
                       width: screenWidth,
                       height: screenHeight * 0.65,
                       decoration: const BoxDecoration(
@@ -106,7 +106,7 @@ class _TwoState extends State<Two> {
                     ),
                   ),
                     Padding(
-                      padding:  EdgeInsets.only(bottom: screenHeight*0.03),
+                      padding:  EdgeInsets.only(bottom: screenHeight*0.035),
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: InkWell(

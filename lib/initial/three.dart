@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
-import 'package:real_estate/home_screen.dart';
+import 'package:real_estate/screens/home_screen.dart';
 import 'package:real_estate/routes/routes_name.dart';
 
 class Three extends StatelessWidget {

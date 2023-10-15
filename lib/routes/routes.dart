@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/auth/login.dart';
-import 'package:real_estate/home_screen.dart';
+import 'package:real_estate/screens/home_screen.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 
