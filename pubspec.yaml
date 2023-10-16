@@ -86,6 +86,8 @@ flutter:
     - assets/images/three.jpg
     - assets/images/Homebackdrop.png
     - assets/svg/heart.svg
+    - assets/svg/star.svg
+    - assets/svg/location.svg
 #    - lib/main.dart
 
   # An image asset can refer to one or more resolution-specific "variants", see

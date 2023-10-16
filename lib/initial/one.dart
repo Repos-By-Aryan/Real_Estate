@@ -20,7 +20,7 @@ class _OneState extends State<One> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(milliseconds: 2300), () {
+    Future.delayed(Duration(milliseconds: 2200), () {
       setState(() {
         isSecondTextVisible = true;
       });

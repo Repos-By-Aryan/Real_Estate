@@ -310,13 +310,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       height:180,
                       width: double.infinity,
                       child: ListView.builder(
-                          shrinkWrap: true,
+                          shrinkWrap: false,
                           scrollDirection: Axis.horizontal,
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
                             final document = snapshot.data!.docs[index];
                             return Container(
-                                constraints: BoxConstraints.expand(height: 180,width: screenWidth*0.8),
+                              margin: EdgeInsets.symmetric(horizontal: 7),
+                                constraints: BoxConstraints.expand(height: 180,width: screenWidth*0.85),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color: Color(0xffF5F4F8),
@@ -328,12 +329,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          width:(screenWidth*0.8)*0.48,
-                                          decoration:BoxDecoration(
-                                              image: DecorationImage(image: NetworkImage(document['image_urls'][0].toString()),fit: BoxFit.cover,),
-                                              borderRadius: BorderRadius.circular(20)),
+                                        child: CachedNetworkImage(
+                                          imageUrl: document['image_urls'][0].toString(),
+                                          imageBuilder: (context, imageProvider) => InkWell(
+                                            onTap: () {},
+                                            child: Container(
+                                              width: (screenWidth * 0.8) * 0.48,
+                                              height: 180, // Add height constraint
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                borderRadius: BorderRadius.circular(20),
+                                              ),
+                                            ),
+                                          ),
+                                          placeholder: (context, url) => CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) => Icon(Icons.error),
                                         ),
+
                                       ),
                                       Positioned(
                                         bottom:18,
@@ -367,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           onPressed: () {  },
-                                          child:SvgPicture.asset(
+                                          child: SvgPicture.asset(
                                             'assets/svg/heart.svg',
                                             width: 25,
                                             height: 25,
@@ -378,24 +393,70 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: RichText(
-                                            maxLines: 2,
-                                            overflow: TextOverflow.visible,
-                                            text: TextSpan(
-                                              text: document['title'],
-                                              style: featuredTitle, // Define your style here
+                                  Container(
+                                    width: (screenWidth * 0.8) * 0.48,// Wrap the Text widget with Expanded
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical:8),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              document['title'],
+                                              style: featuredTitle,
+                                              maxLines: 2,
+                                              softWrap: true,
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                child:SvgPicture.asset(
+                                                  'assets/svg/star.svg',
+                                                  width: 20,
+                                                  height: 20,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(left:4),
+                                                child: Text(document['rating'].toString(),
+                                                    style:ratingStyle),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 2,),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 2.0),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  child:SvgPicture.asset(
+                                                    'assets/svg/location.svg',
+                                                    width: 20,
+                                                    height: 20,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(left:4),
+                                                  child: Text(document['address']['city'].toString(),
+                                                      style:ratingStyle),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 10.0),
+                                              child: RichText(text: TextSpan(text: ('Rs. '+document['price']['sell'].toString()).toString(),style: boldText,children: [
+                                                // TextSpan(text:"/month",style: text),
+                                              ]),
+                                              ),
+                                            ),
+                                        ],
+                                      ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             );
@@ -411,52 +472,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-// Center(
-// child:Padding(
-// padding: const EdgeInsets.symmetric(horizontal: 8.0),
-// child: SearchAnchor(
-// builder: (BuildContext context, SearchController controller) {
-// return Container(
-// constraints: BoxConstraints.tightForFinite(),
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.circular(12),
-// color: Color(0xffF5F4F8),// Adjust the border radius as needed
-// border: Border.all(
-// color: Colors.grey, // Add a border color
-// ),
-// ),
-// child: SearchBar(
-// controller: controller,
-// padding: const MaterialStatePropertyAll<EdgeInsets>(
-// EdgeInsets.symmetric(horizontal: 16.0,vertical: 12)),
-// onTap: () {
-// controller.openView();
-// },
-// onChanged: (_) {
-// controller.openView();
-// },
-// leading: const Icon(Icons.search),
-// trailing: <Widget>[
-// Text("|"),
-// SizedBox(width:5),
-// Icon(Icons.mic_none_outlined)
-// ],
-// ),
-// );
-// }, suggestionsBuilder:
-// (BuildContext context, SearchController controller) {
-// return List<ListTile>.generate(5, (int index) {
-// final String item = 'item $index';
-// return ListTile(
-// title: Text(item),
-// onTap: () {
-// setState(() {
-// controller.closeView(item);
-// });
-// },
-// );
-// });
-// }),
-// ),
-// ),
