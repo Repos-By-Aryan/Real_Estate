@@ -15,6 +15,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String formatValue(double value) {
+    if (value >= 10000000) {
+      double valueInCr = value / 10000000.0;
+      return '${valueInCr.toStringAsFixed(1)} Cr';
+    }
+    else if(value >= 100000){
+      double valueInL = value/ 100000.0;
+      return'${valueInL.toStringAsFixed(1)} L';
+    }
+    else if(value >= 1000){
+      double valueInK = value/ 100000.0;
+      return'${valueInK.toStringAsFixed(1)} k';
+    }
+    else {
+      return value.toString();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -396,8 +413,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Container(
                                     width: (screenWidth * 0.8) * 0.48,// Wrap the Text widget with Expanded
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical:8),
+                                      padding: const EdgeInsets.only(left: 5.0,top:8,bottom: 8),
                                       child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -429,6 +448,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Padding(
                                             padding: const EdgeInsets.only(left: 2.0),
                                             child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 SizedBox(
                                                   child:SvgPicture.asset(
@@ -441,14 +461,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 Padding(
                                                   padding: EdgeInsets.only(left:4),
                                                   child: Text(document['address']['city'].toString(),
-                                                      style:ratingStyle),
+                                                      style:ratingStyle,softWrap: true,
+                                                  maxLines: 2,),
                                                 ),
                                               ],
                                             ),
                                           ),
                                             Padding(
                                               padding: const EdgeInsets.only(top: 10.0),
-                                              child: RichText(text: TextSpan(text: ('Rs. '+document['price']['sell'].toString()).toString(),style: boldText,children: [
+                                              child: RichText(text: TextSpan(text: ('Rs. '+formatValue(document['price']['sell'].toDouble())),style: boldText,children: [
                                                 // TextSpan(text:"/month",style: text),
                                               ]),
                                               ),
