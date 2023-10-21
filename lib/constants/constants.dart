@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 final Color grey = Color(0x80bebebe);
-
+var saleTextStyle = TextStyle(fontFamily: 'Lato', fontWeight: FontWeight.w700, color: Colors.white, fontSize: 30,);
 var heading = TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w900,fontSize: 23,color: Colors.black);
 var subheading = TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w700,fontSize: 23,color:Color(0xff234F68) );
-var text = TextStyle(fontFamily:'Lato',color:Color(0xff234F68),fontSize: 15);
+var text = TextStyle(fontFamily:'Lato',color:Color(0xff234F68),fontSize: 12);
 var boldText = TextStyle(fontFamily:'Lato',color:Color(0xff234F68),fontSize: 18,fontWeight: FontWeight.w700);
 var featuredTitle = TextStyle(fontFamily: 'Lato',color: Color(0xFF252B5C),fontSize: 20,fontWeight: FontWeight.w700);
 var ratingStyle = TextStyle(
-  fontSize: 15,  fontWeight: FontWeight.w700, color: Color(0xff53587A),fontFamily: 'Lato',);
+  fontSize: 12,  fontWeight: FontWeight.w700, color: Color(0xff53587A),fontFamily: 'Lato',);
 class SignInButton extends StatelessWidget {
   final String title;
   final String logo;
