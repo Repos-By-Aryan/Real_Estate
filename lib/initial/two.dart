@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
-import 'package:real_estate/screens/home_screen.dart';
+import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'three.dart';
 
