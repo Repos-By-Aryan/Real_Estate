@@ -2,7 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/auth/login.dart';
-import 'package:real_estate/screens/home_screen.dart';
+import 'package:real_estate/home/home_screen.dart';
+import 'package:real_estate/home/promotion.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 
@@ -26,6 +27,8 @@ class Routes{
         return MaterialPageRoute(builder: (context) => Two());
       case RoutesName.three:
         return MaterialPageRoute(builder: (context) => Three());
+      case RoutesName.promotion:
+        return MaterialPageRoute(builder: (context) => Promotion());
       default:
         return MaterialPageRoute(
           builder:(context) { return Scaffold(
