@@ -1,9 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
-import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/routes/routes_name.dart';
-import 'three.dart';
 
 class Two extends StatefulWidget {
   static const String id = 'Two';
@@ -21,7 +19,7 @@ class _TwoState extends State<Two> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(milliseconds: 2500), () {
+    Future.delayed(const Duration(milliseconds: 2500), () {
       setState(() {
         isSecondTextVisible = true;
       });
@@ -66,7 +64,7 @@ class _TwoState extends State<Two> {
                   animatedTexts: [
                     TyperAnimatedText(
                       'Fast sell your property\nin just',
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 30,
                           color: Colors.black),
@@ -75,7 +73,7 @@ class _TwoState extends State<Two> {
                   ],
                 ),
                 if (isSecondTextVisible)
-                  Text(
+                  const Text(
                     'one click',
                     style: TextStyle(
                       color: Color(0xff003d64),

@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/firebase_options.dart';
-import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/routes/routes.dart';
 import 'package:real_estate/routes/routes_name.dart';
-import 'package:real_estate/splash_services/splash_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'initial/one.dart';
-import 'initial/two.dart';
-import 'initial/three.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();

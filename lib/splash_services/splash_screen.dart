@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate/initial/one.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:video_player/video_player.dart';
 

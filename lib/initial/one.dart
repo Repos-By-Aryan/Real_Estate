@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/constants/constants.dart';
-import 'package:real_estate/home/home_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:real_estate/routes/routes_name.dart';
 
-import 'two.dart';
 
 class One extends StatefulWidget {
   static const String id = 'One';
@@ -20,7 +18,7 @@ class _OneState extends State<One> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(milliseconds: 2200), () {
+    Future.delayed(const Duration(milliseconds: 2200), () {
       setState(() {
         isSecondTextVisible = true;
       });
@@ -66,7 +64,7 @@ class _OneState extends State<One> {
                   animatedTexts: [
                     TyperAnimatedText(
                       'Find best place\nto stay in',
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 30,
                           color: Colors.black),
@@ -75,7 +73,7 @@ class _OneState extends State<One> {
                   ],
                 ),
                 if (isSecondTextVisible)
-                  Text(
+                  const Text(
                     'good price',
                     style: TextStyle(
                       color: Color(0xff003d64),

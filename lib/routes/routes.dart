@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/home/home_screen.dart';
@@ -16,22 +15,22 @@ class Routes{
     switch(settings.name){
 
       case RoutesName.splashScreen:
-        return MaterialPageRoute(builder: (context) => SplashScreen());
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
       case RoutesName.homeScreen:
-        return MaterialPageRoute(builder: (context) => HomeScreen());
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
       case RoutesName.login:
-        return MaterialPageRoute(builder: (context) => LoginScreen());
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
       case RoutesName.one:
-        return MaterialPageRoute(builder: (context) => One());
+        return MaterialPageRoute(builder: (context) => const One());
       case RoutesName.two:
-        return MaterialPageRoute(builder: (context) => Two());
+        return MaterialPageRoute(builder: (context) => const Two());
       case RoutesName.three:
-        return MaterialPageRoute(builder: (context) => Three());
+        return MaterialPageRoute(builder: (context) => const Three());
       case RoutesName.promotion:
-        return MaterialPageRoute(builder: (context) => Promotion());
+        return MaterialPageRoute(builder: (context) => const Promotion());
       default:
         return MaterialPageRoute(
-          builder:(context) { return Scaffold(
+          builder:(context) { return const Scaffold(
             body: Center(child: Text("No route found"),),
           );}
         );

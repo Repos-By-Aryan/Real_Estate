@@ -1,16 +1,16 @@
 
 
 import 'package:flutter/material.dart';
-final Color theme = Color(0xff234F68);
-final Color navbarColor = Color(0xe5ffffff);
-final Color grey = Color(0x80bebebe);
-var saleTextStyle = TextStyle(fontFamily: 'Lato', fontWeight: FontWeight.w700, color: Colors.white, fontSize: 30,);
-var heading = TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w900,fontSize: 23,color: Colors.black);
-var subheading = TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w700,fontSize: 23,color:theme );
-var text = TextStyle(fontFamily:'Lato',color:theme,fontSize: 12);
-var boldText = TextStyle(fontFamily:'Lato',color:theme,fontSize: 18,fontWeight: FontWeight.w700);
-var featuredTitle = TextStyle(fontFamily: 'Lato',color: Color(0xFF252B5C),fontSize: 20,fontWeight: FontWeight.w700);
-var ratingStyle = TextStyle(
+const Color theme = Color(0xff234F68);
+const Color navbarColor = Color(0xe5ffffff);
+const Color grey = Color(0x80bebebe);
+var saleTextStyle = const TextStyle(fontFamily: 'Lato', fontWeight: FontWeight.w700, color: Colors.white, fontSize: 30,);
+var heading = const TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w900,fontSize: 23,color: Colors.black);
+var subheading = const TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w700,fontSize: 23,color:theme );
+var text = const TextStyle(fontFamily:'Lato',color:theme,fontSize: 12);
+var boldText = const TextStyle(fontFamily:'Lato',color:theme,fontSize: 18,fontWeight: FontWeight.w700);
+var featuredTitle = const TextStyle(fontFamily: 'Lato',color: Color(0xFF252B5C),fontSize: 20,fontWeight: FontWeight.w700);
+var ratingStyle = const TextStyle(
   fontSize: 12,  fontWeight: FontWeight.w700, color: Color(0xff53587A),fontFamily: 'Lato',);
 class SignInButton extends StatelessWidget {
   final String title;
@@ -25,7 +25,7 @@ class SignInButton extends StatelessWidget {
       width: width,
       height:height,
       decoration: BoxDecoration(
-        color: Color(0xff606060),
+        color: const Color(0xff606060),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
@@ -35,8 +35,8 @@ class SignInButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(logo,width: 40,height:30),
-            SizedBox(width: 10,),
-            Text(title,style: TextStyle(fontWeight: FontWeight.bold),),
+            const SizedBox(width: 10,),
+            Text(title,style: const TextStyle(fontWeight: FontWeight.bold),),
           ],
         ),
       ),
@@ -57,7 +57,7 @@ class RoundedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       height: 45,
-      child: Center(child: Text(title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
+      child: Center(child: Text(title,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
     );
   }
 }
