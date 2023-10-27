@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/home/promotion.dart';
+import 'package:real_estate/home/search.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 
@@ -28,6 +29,9 @@ class Routes{
         return MaterialPageRoute(builder: (context) => const Three());
       case RoutesName.promotion:
         return MaterialPageRoute(builder: (context) => const Promotion());
+        case RoutesName.search:
+        return MaterialPageRoute(builder: (context) => const Search());
+
       default:
         return MaterialPageRoute(
           builder:(context) { return const Scaffold(

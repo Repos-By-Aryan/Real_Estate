@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   int selectedCard = 0;
+  int currentIndex =0;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -153,37 +154,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 18,
                 ),
                 Center(
-                  child: InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, RoutesName.search);
+                      },
                       child: Container(
                         height: 70,
                         decoration: BoxDecoration(
                           color: const Color(0xffF5F4F8),
-                          borderRadius: BorderRadius.circular(
-                              12), // Adjust the border radius as needed// Add a border color
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
                             Padding(
                               padding: EdgeInsets.all(18.0),
                               child: Icon(Icons.search, color: Colors.black),
                             ),
                             Expanded(
-                              child: TextField(
-                                readOnly: true,
-                                decoration: InputDecoration(
-                                  hintText: "Search Apartment, House, etc.",
-                                  border: InputBorder
-                                      .none, // Remove the input border
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                child: TextField(
+                                  readOnly: true,
+                                  decoration: InputDecoration(
+                                    hintText: "Search Apartment, House, etc.",
+                                    border: InputBorder.none,
+                                  ),
                                 ),
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.all(18.0),
-                              child: Icon(Icons.mic_none_outlined,
-                                  color: Colors.black),
+                              child: Icon(Icons.mic_none_outlined, color: Colors.black),
                             ),
                           ],
                         ),
@@ -191,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -1531,6 +1535,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+
         bottomNavigationBar: Container(
           color:navbarColor,
           child: Padding(
@@ -1543,16 +1548,24 @@ class _HomeScreenState extends State<HomeScreen> {
               rippleColor: const Color(0x2b234f68),
               tabBackgroundColor: const Color(0x1a234f68),
               padding: const EdgeInsets.all(16),
-              onTabChange: (index){},
-              tabs:const [
+              onTabChange: (index){
+                setState(() {
+                currentIndex = index;
+                });
+              },
+              tabs: [
                 GButton(icon: Icons.home,
-                text:"Home"),
+                text:"Home",active: currentIndex==0,),
                 GButton(icon: Icons.search,
-                text:"Search"),
+                text:"Search",
+                active: currentIndex == 1,
+                onPressed: (){
+                  Navigator.pushNamed(context,RoutesName.search);
+                },),
                 GButton(icon: Icons.favorite_border,
-                text:"Likes"),
+                text:"Likes",active: currentIndex == 2,),
                 GButton(icon: Icons.account_circle,
-                text:"Account"),
+                text:"Account",active: currentIndex == 3,),
               ]
             ),
           ),

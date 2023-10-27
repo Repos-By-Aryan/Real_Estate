@@ -239,7 +239,8 @@ class Promotion extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              const TextWrapper(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores',),
+              TextWrapper(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores',),
+
             ],
           ),
         ),
@@ -247,6 +248,7 @@ class Promotion extends StatelessWidget {
     );
   }
 }
+
 class TextWrapper extends StatefulWidget {
   const TextWrapper({Key? key, required this.text}): super(key: key);
   final String text;
@@ -258,6 +260,7 @@ class _TextWrapperState extends State<TextWrapper> with TickerProviderStateMixin
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -267,22 +270,44 @@ class _TextWrapperState extends State<TextWrapper> with TickerProviderStateMixin
                   constraints: isExpanded ? const BoxConstraints(): const BoxConstraints(maxHeight: 70),
                   child: Text(
                     widget.text,
-                    style: const TextStyle(fontSize: 16),
+                    style: ratingStyle,
                     softWrap: true,
                     overflow: TextOverflow.fade,
                   )
               )
           ),
-          isExpanded ? OutlinedButton.icon(
-              icon: const Icon(Icons.arrow_upward),
-              label: const Text('Read less'),
-              onPressed: () => setState(() => isExpanded = false)
-          ) : TextButton.icon(
-              icon: const Icon(Icons.arrow_downward),
-              label: const Text('Read more'),
-              onPressed: () => setState(() => isExpanded = true)
-          )
-        ]
+          SizedBox(height: 15,),
+          isExpanded ? Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 50,
+              width: screenWidth *0.7,
+              decoration: BoxDecoration(
+                color: Color(0xff8bc83f),
+                borderRadius: BorderRadius.circular(17),
+              ),
+              child: TextButton.icon(
+                  icon: const Icon(Icons.arrow_upward,color: Colors.white,),
+                  label:  Text('Read less',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 15),),
+                  onPressed: () => setState(() => isExpanded = false)
+              ),
+            ),
+          ) :Align(
+    alignment: Alignment.bottomCenter,
+    child: Container(
+    height: 50,
+    width: screenWidth *0.7,
+    decoration: BoxDecoration(
+    color: Color(0xff8bc83f),
+    borderRadius: BorderRadius.circular(17),
+    ),
+    child: TextButton.icon(
+    icon: const Icon(Icons.arrow_downward,color: Colors.white,),
+    label:  Text('Read more',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 15),),
+    onPressed: () => setState(() => isExpanded = true)
+    ),
+    ),
+          ),]
     );
   }
 }
