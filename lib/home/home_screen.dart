@@ -3,9 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:real_estate/constants/constants.dart';
+import 'package:real_estate/home/search.dart';
 import 'package:real_estate/routes/routes_name.dart';
+
+import 'bottom_navbar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
@@ -31,15 +33,19 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  final screens = [
+    const HomeScreen(),
+    const Search(),
+  ];
   int selectedCard = 0;
   int currentIndex =0;
+  final filters = ['All', 'House', 'Apartment', 'Villa'];
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final firestore =
     FirebaseFirestore.instance.collection('listings').snapshots();
-    final filters = ['All', 'House', 'Apartment', 'Villa'];
     CollectionReference ref = FirebaseFirestore.instance.collection('users');
     return Container(
       width: screenWidth,
@@ -166,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: const Color(0xffF5F4F8),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Row(
+                        child: const Row(
                           children: [
                             Padding(
                               padding: EdgeInsets.all(18.0),
@@ -174,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                                padding: EdgeInsets.symmetric(horizontal: 2.0),
                                 child: TextField(
                                   readOnly: true,
                                   decoration: InputDecoration(
@@ -1535,41 +1541,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+        bottomNavigationBar: const BottomNavBar(),
 
-        bottomNavigationBar: Container(
-          color:navbarColor,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 10),
-            child: GNav(
-              gap: 8,
-              backgroundColor: navbarColor,
-              color:theme,
-              activeColor: theme,
-              rippleColor: const Color(0x2b234f68),
-              tabBackgroundColor: const Color(0x1a234f68),
-              padding: const EdgeInsets.all(16),
-              onTabChange: (index){
-                setState(() {
-                currentIndex = index;
-                });
-              },
-              tabs: [
-                GButton(icon: Icons.home,
-                text:"Home",active: currentIndex==0,),
-                GButton(icon: Icons.search,
-                text:"Search",
-                active: currentIndex == 1,
-                onPressed: (){
-                  Navigator.pushNamed(context,RoutesName.search);
-                },),
-                GButton(icon: Icons.favorite_border,
-                text:"Likes",active: currentIndex == 2,),
-                GButton(icon: Icons.account_circle,
-                text:"Account",active: currentIndex == 3,),
-              ]
-            ),
-          ),
-        ),
       ),
     );
   }

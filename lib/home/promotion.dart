@@ -239,7 +239,7 @@ class Promotion extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              TextWrapper(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores',),
+              const TextWrapper(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores',),
 
             ],
           ),
@@ -276,19 +276,19 @@ class _TextWrapperState extends State<TextWrapper> with TickerProviderStateMixin
                   )
               )
           ),
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
           isExpanded ? Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               height: 50,
               width: screenWidth *0.7,
               decoration: BoxDecoration(
-                color: Color(0xff8bc83f),
+                color: const Color(0xff8bc83f),
                 borderRadius: BorderRadius.circular(17),
               ),
               child: TextButton.icon(
                   icon: const Icon(Icons.arrow_upward,color: Colors.white,),
-                  label:  Text('Read less',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 15),),
+                  label:  const Text('Read less',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 15),),
                   onPressed: () => setState(() => isExpanded = false)
               ),
             ),
@@ -298,12 +298,12 @@ class _TextWrapperState extends State<TextWrapper> with TickerProviderStateMixin
     height: 50,
     width: screenWidth *0.7,
     decoration: BoxDecoration(
-    color: Color(0xff8bc83f),
+    color: const Color(0xff8bc83f),
     borderRadius: BorderRadius.circular(17),
     ),
     child: TextButton.icon(
     icon: const Icon(Icons.arrow_downward,color: Colors.white,),
-    label:  Text('Read more',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 15),),
+    label:  const Text('Read more',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 15),),
     onPressed: () => setState(() => isExpanded = true)
     ),
     ),

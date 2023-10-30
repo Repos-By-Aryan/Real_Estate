@@ -1,10 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../constants/constants.dart';
-import '../routes/routes_name.dart';
 
 int currentIndex = 1;
 class Search extends StatefulWidget {

@@ -16,8 +16,8 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
 int currentIndex =0;
 final screens = [
-  HomeScreen(),
-  Search(),
+  const HomeScreen(),
+  const Search(),
 ];
   @override
   Widget build(BuildContext context) {
