@@ -8,5 +8,6 @@ class RoutesName{
   static const three = 'three';
   static const login = 'login';
   static const splashScreen = 'splash_screen';
+  static const bottomNavBar = 'bottom_navbar';
 
 }
