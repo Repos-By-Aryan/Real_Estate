@@ -180,13 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 2.0),
-                                child: TextField(
-                                  readOnly: true,
-                                  decoration: InputDecoration(
-                                    hintText: "Search Apartment, House, etc.",
-                                    border: InputBorder.none,
-                                  ),
-                                ),
+                                child: Text('Search Apartment, House, etc.')
                               ),
                             ),
                             Padding(
