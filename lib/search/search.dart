@@ -18,9 +18,36 @@ class _SearchState extends State<Search> {
   Widget buildContent() {
     switch (selectedCard) {
       case 0:
-        return Text(
-          'Property Type',
-          style: subheading,
+        return Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Property Type',
+                style: subheading,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 100,
+                child: ListView.builder(itemCount:10,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context,index){
+                  return Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    width:100,
+                    decoration: BoxDecoration(border: Border.all(width: 1),borderRadius: BorderRadius.circular(12)),
+                    child: Column(
+                      children: [
+                        Icon(Icons.account_circle),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+            ],
+          ),
         );
       default:
         return Container(); // You can return a different widget for other cases
