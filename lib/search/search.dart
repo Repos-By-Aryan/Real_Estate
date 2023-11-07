@@ -11,6 +11,9 @@ class Search extends StatefulWidget {
 
 int selectedCard = 0;
 final filters = ['Buy', 'Rent'];
+final propertyType = ['House','Apartment','Villa'];
+final icons = <Widget>[Icon(Icons.home_outlined,size: 35,),Icon(Icons.account_circle),Icon(Icons.add)];
+
 
 class _SearchState extends State<Search> {
 
@@ -31,16 +34,21 @@ class _SearchState extends State<Search> {
               ),
               Container(
                 height: 100,
-                child: ListView.builder(itemCount:10,
+                child: ListView.builder(itemCount:3,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context,index){
                   return Container(
+                    margin: const EdgeInsets.only(right: 10),
                     padding: EdgeInsets.symmetric(vertical: 10),
                     width:100,
                     decoration: BoxDecoration(border: Border.all(width: 1),borderRadius: BorderRadius.circular(12)),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(Icons.account_circle),
+                        icons[index],
+                        SizedBox(height: 2,),
+                        Text(propertyType[index],softWrap: true,),
                       ],
                     ),
                   );
