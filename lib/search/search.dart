@@ -11,10 +11,16 @@ class Search extends StatefulWidget {
 
 int selectedCard = 0;
 final filters = ['Buy', 'Rent'];
-
+final propertyType = ['House', 'Apartment', 'Villa'];
+final icons = <Widget>[
+  Icon(
+    Icons.home_outlined,
+  ),
+  Icon(Icons.account_circle),
+  Icon(Icons.add)
+];
 
 class _SearchState extends State<Search> {
-
   // Function to build the content based on selectedCard
   Widget buildContent() {
     switch (selectedCard) {
@@ -36,16 +42,27 @@ class _SearchState extends State<Search> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context,index){
                   return Container(
-                    margin: EdgeInsets.only(right: 10),
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    width:100,
-                    decoration: BoxDecoration(border: Border.all(width: 0.2),borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                      children: [
-                        Icon(Icons.account_circle),
-                      ],
-                    ),
-                  );
+                    margin: const EdgeInsets.only(right: 10),
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        width: 100,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            icons[index],
+                            SizedBox(
+                              height: 2,
+                            ),
+                            Text(
+                              propertyType[index],
+                              softWrap: true,
+                            ),
+                          ],
+                        ),
+                      );
                 }),
               ),
             ],
