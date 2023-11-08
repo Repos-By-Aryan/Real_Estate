@@ -12,6 +12,7 @@ class Search extends StatefulWidget {
 int selectedCard = 0;
 final filters = ['Buy', 'Rent'];
 
+
 class _SearchState extends State<Search> {
 
   // Function to build the content based on selectedCard
@@ -35,9 +36,10 @@ class _SearchState extends State<Search> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context,index){
                   return Container(
+                    margin: EdgeInsets.only(right: 10),
                     padding: EdgeInsets.symmetric(vertical: 10),
                     width:100,
-                    decoration: BoxDecoration(border: Border.all(width: 1),borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(border: Border.all(width: 0.2),borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       children: [
                         Icon(Icons.account_circle),
