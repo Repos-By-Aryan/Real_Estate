@@ -31,7 +31,7 @@ class _SearchState extends State<Search> {
               ),
               Container(
                 height: 100,
-                child: ListView.builder(itemCount:10,
+                child: ListView.builder(itemCount:3,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context,index){
                   return Container(
