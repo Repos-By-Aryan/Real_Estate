@@ -15,14 +15,26 @@ final propertyType = ['House', 'Apartment', 'Villa'];
 final icons = <Widget>[
   Icon(
     Icons.home_outlined,
+    size: 30,
+    color: theme,
   ),
-  Icon(Icons.account_circle),
-  Icon(Icons.add)
+  Icon(
+    Icons.apartment_outlined,
+    size: 30,
+    color: theme,
+  ),
+  Icon(
+    Icons.villa,
+    size: 30,
+    color: theme,
+  )
 ];
 
 class _SearchState extends State<Search> {
   // Function to build the content based on selectedCard
   Widget buildContent() {
+    List<bool> _isChecked = [false, false, false];
+
     switch (selectedCard) {
       case 0:
         return Expanded(
@@ -38,40 +50,44 @@ class _SearchState extends State<Search> {
               ),
               Container(
                 height: 100,
-                child: ListView.builder(itemCount:3,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context,index){
-                  return Container(
-                    margin: const EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        width: 100,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 1),
-                            borderRadius: BorderRadius.circular(12)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            icons[index],
-                            SizedBox(
-                              height: 2,
-                            ),
-                            Text(
-                              propertyType[index],
-                              softWrap: true,
-                            ),
-                          ],
+                child: ListView.builder(
+                  itemCount: 3,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.only(right: 7),
+                      width: 100,
+                      child: CheckboxListTile(
+                        value: _isChecked[index],
+                        onChanged: (value) {
+                          setState(() {
+                            _isChecked[index] = value as bool;
+                          });
+                        },
+                        title: icons[index],
+                        subtitle: Text(
+                          propertyType[index],
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                          ),
                         ),
-                      );
-                }),
+                        controlAffinity: ListTileControlAffinity.trailing,
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),
         );
       default:
-        return Container(); // You can return a different widget for other cases
+        return Container();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -107,8 +123,7 @@ class _SearchState extends State<Search> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: TextButton(
               onPressed: () {
-                setState(() {
-                });
+                setState(() {});
               },
               child: Text(
                 "Reset",
@@ -169,7 +184,6 @@ class _SearchState extends State<Search> {
             buildContent(),
           ],
         ),
-
       ),
     );
   }
