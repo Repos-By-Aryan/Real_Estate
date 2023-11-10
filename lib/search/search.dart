@@ -32,55 +32,151 @@ final icons = <Widget>[
 
 class _SearchState extends State<Search> {
   // Function to build the content based on selectedCard
-  Widget buildContent() {
-    List<bool> _isChecked = [false, false, false];
+    List<bool> isChecked = [false, false, false];
+  Widget buildContent(final screenWidth, final screenHeight) {
 
     switch (selectedCard) {
       case 0:
         return Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Property Type',
-                style: subheading,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 100,
-                child: ListView.builder(
-                  itemCount: 3,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(right: 7),
-                      width: 100,
-                      child: CheckboxListTile(
-                        value: _isChecked[index],
-                        onChanged: (value) {
-                          setState(() {
-                            _isChecked[index] = value as bool;
-                          });
-                        },
-                        title: icons[index],
-                        subtitle: Text(
-                          propertyType[index],
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black,
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Property Type',
+                  style: subheading,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 100,
+                  child: ListView.builder(
+                    itemCount: 3,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 7),
+                        width: 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isChecked[index] = !isChecked[index];
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12 ),
+                              color: isChecked[index] ? Color(0x234F68B0):Colors.transparent,
+                              border: Border.all(
+                                width:0.2,
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  icons[index],
+                                  SizedBox(
+                                    height: 2,
+                                  ),
+                                  Text(
+                                    propertyType[index],
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'Lato',
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                        controlAffinity: ListTileControlAffinity.trailing,
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Budget',
+                  style: subheading,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: screenWidth*0.4,
+                      child: DropdownButtonFormField<String>(
+                        menuMaxHeight: 250,
+                        decoration: InputDecoration(
+                          prefix: Text('₹ '),
+                          filled: false,
+                          fillColor:  Color(0xA4F68B0),
+                          labelText: 'Min',
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        focusColor: theme,
+                        hint: Text('₹ Min'),
+                        items: ['5 Lac', '10 Lac', '15 Lac','20 Lac'].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          // Handle the value change
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: screenWidth*0.4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: DropdownButtonFormField<String>(
+                        menuMaxHeight: 250,
+                        decoration: InputDecoration(
+                          prefix: Text('₹ '),
+                          filled: true,
+                          fillColor:  Color(0xA4F68B0),
+                          labelText: 'Max',
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        focusColor: theme,
+                        hint: Text('₹ Max'),
+                        items: ['10 Lac', '20 Lac', '30 Lac','40 Lac','50 Lac'].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          // Handle the value change
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+
+              ],
+            ),
           ),
         );
       default:
@@ -181,7 +277,7 @@ class _SearchState extends State<Search> {
             SizedBox(
               height: 15,
             ),
-            buildContent(),
+            buildContent(screenWidth,screenHeight),
           ],
         ),
       ),
