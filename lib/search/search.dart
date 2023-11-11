@@ -12,6 +12,7 @@ class Search extends StatefulWidget {
 int selectedCard = 0;
 final filters = ['Buy', 'Rent'];
 final propertyType = ['House', 'Apartment', 'Villa'];
+final bedrooms = ['1 BHK', '2 BHK', '3 BHK','4 BHK','>4 BHK'];
 final icons = <Widget>[
   Icon(
     Icons.home_outlined,
@@ -32,7 +33,9 @@ final icons = <Widget>[
 
 class _SearchState extends State<Search> {
   // Function to build the content based on selectedCard
-    List<bool> isChecked = [false, false, false];
+    List<bool> propertTypeIsChecked = [true, false, false];
+    List<bool> bedroomIsChecked = [false, false, false,false,true];
+    String selectedValue = '';
   Widget buildContent(final screenWidth, final screenHeight) {
 
     switch (selectedCard) {
@@ -53,7 +56,7 @@ class _SearchState extends State<Search> {
                 Container(
                   height: 100,
                   child: ListView.builder(
-                    itemCount: 3,
+                    itemCount: propertyType.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Container(
@@ -62,13 +65,13 @@ class _SearchState extends State<Search> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              isChecked[index] = !isChecked[index];
+                              propertTypeIsChecked[index] = !propertTypeIsChecked[index];
                             });
                           },
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12 ),
-                              color: isChecked[index] ? Color(0x234F68B0):Colors.transparent,
+                              color: propertTypeIsChecked[index] ? Color(0x234F68B0):Colors.transparent,
                               border: Border.all(
                                 width:0.2,
                                 color: Colors.black,
@@ -116,7 +119,7 @@ class _SearchState extends State<Search> {
                     Container(
                       width: screenWidth*0.4,
                       child: DropdownButtonFormField<String>(
-                        menuMaxHeight: 250,
+                        menuMaxHeight: 450,
                         decoration: InputDecoration(
                           prefix: Text('₹ '),
                           filled: false,
@@ -129,8 +132,8 @@ class _SearchState extends State<Search> {
                         ),
                         borderRadius: BorderRadius.circular(20),
                         focusColor: theme,
-                        hint: Text('₹ Min'),
-                        items: ['5 Lac', '10 Lac', '15 Lac','20 Lac'].map<DropdownMenuItem<String>>((String value) {
+                        hint: Text('Min'),
+                        items: ['5 Lac', '10 Lac', '20 Lac', '30 Lac','40 Lac','50 Lac','60 Lac','70 Lac','80 Lac','90 Lac','1 Cr','1.2 Cr','1.4 Cr','1.6 Cr','1.8 Cr','2 Cr','2.3 Cr','2.6 Cr','3 Cr','3.5 Cr','4 Cr','4.5 Cr','5 Cr','10 Cr','15 Cr'].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -147,10 +150,10 @@ class _SearchState extends State<Search> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: DropdownButtonFormField<String>(
-                        menuMaxHeight: 250,
+                        menuMaxHeight: 450,
                         decoration: InputDecoration(
                           prefix: Text('₹ '),
-                          filled: true,
+                          filled: false,
                           fillColor:  Color(0xA4F68B0),
                           labelText: 'Max',
                           alignLabelWithHint: true,
@@ -160,8 +163,8 @@ class _SearchState extends State<Search> {
                         ),
                         borderRadius: BorderRadius.circular(20),
                         focusColor: theme,
-                        hint: Text('₹ Max'),
-                        items: ['10 Lac', '20 Lac', '30 Lac','40 Lac','50 Lac'].map<DropdownMenuItem<String>>((String value) {
+                        hint: Text('Max'),
+                        items: ['10 Lac', '20 Lac', '30 Lac','40 Lac','50 Lac','60 Lac','70 Lac','80 Lac','90 Lac','1 Cr','1.2 Cr','1.4 Cr','1.6 Cr','1.8 Cr','2 Cr','2.3 Cr','2.6 Cr','3 Cr','3.5 Cr','4 Cr','4.5 Cr','5 Cr','10 Cr','15 Cr'].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -174,7 +177,338 @@ class _SearchState extends State<Search> {
                     ),
                   ],
                 ),
-
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Bedrooms',
+                  style: subheading,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 50,
+                  child: ListView.builder(
+                    itemCount: bedrooms.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 7),
+                        width: 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              bedroomIsChecked[index] = !bedroomIsChecked[index];
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12 ),
+                              color: bedroomIsChecked[index] ? Color(0x234F68B0):Colors.transparent,
+                              border: Border.all(
+                                width:0.2,
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  bedrooms[index],
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          ),
+        );
+      case 1:
+        return Expanded(
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Property Type',
+                  style: subheading,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 100,
+                  child: ListView.builder(
+                    itemCount: propertyType.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 7),
+                        width: 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              propertTypeIsChecked[index] = !propertTypeIsChecked[index];
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12 ),
+                              color: propertTypeIsChecked[index] ? Color(0x234F68B0):Colors.transparent,
+                              border: Border.all(
+                                width:0.2,
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  icons[index],
+                                  SizedBox(
+                                    height: 2,
+                                  ),
+                                  Text(
+                                    propertyType[index],
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'Lato',
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Budget',
+                  style: subheading,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: screenWidth*0.4,
+                      child: DropdownButtonFormField<String>(
+                        menuMaxHeight: 450,
+                        decoration: InputDecoration(
+                          prefix: Text('₹ '),
+                          filled: false,
+                          fillColor:  Color(0xA4F68B0),
+                          labelText: 'Min',
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        focusColor: theme,
+                        hint: Text('Min'),
+                        items: ['5 Lac', '10 Lac', '20 Lac', '30 Lac','40 Lac','50 Lac','60 Lac','70 Lac','80 Lac','90 Lac','1 Cr','1.2 Cr','1.4 Cr','1.6 Cr','1.8 Cr','2 Cr','2.3 Cr','2.6 Cr','3 Cr','3.5 Cr','4 Cr','4.5 Cr','5 Cr','10 Cr','15 Cr'].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          // Handle the value change
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: screenWidth*0.4,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: DropdownButtonFormField<String>(
+                        menuMaxHeight: 450,
+                        decoration: InputDecoration(
+                          prefix: Text('₹ '),
+                          filled: false,
+                          fillColor:  Color(0xA4F68B0),
+                          labelText: 'Max',
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        focusColor: theme,
+                        hint: Text('Max'),
+                        items: ['10 Lac', '20 Lac', '30 Lac','40 Lac','50 Lac','60 Lac','70 Lac','80 Lac','90 Lac','1 Cr','1.2 Cr','1.4 Cr','1.6 Cr','1.8 Cr','2 Cr','2.3 Cr','2.6 Cr','3 Cr','3.5 Cr','4 Cr','4.5 Cr','5 Cr','10 Cr','15 Cr'].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          // Handle the value change
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Bedrooms',
+                  style: subheading,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 50,
+                  child: ListView.builder(
+                    itemCount: bedrooms.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 7),
+                        width: 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              bedroomIsChecked[index] = !bedroomIsChecked[index];
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12 ),
+                              color: bedroomIsChecked[index] ? Color(0x234F68B0):Colors.transparent,
+                              border: Border.all(
+                                width:0.2,
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  bedrooms[index],
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Tenants Preferred',
+                  style: subheading,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 50,
+                  child: ListView.builder(
+                    itemCount: bedrooms.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 7),
+                        width: 100,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              bedroomIsChecked[index] = !bedroomIsChecked[index];
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12 ),
+                              color: bedroomIsChecked[index] ? Color(0x234F68B0):Colors.transparent,
+                              border: Border.all(
+                                width:0.2,
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  bedrooms[index],
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Lato',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Row(children: [
+                  RadioListTile<String>(
+                  title: Text('Option 1'),
+                  value: 'Option 1',
+                  groupValue: selectedValue,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value!;
+                    });
+                  },
+                ),
+                  RadioListTile<String>(
+                    title: Text('Option 2'),
+                    value: 'Option 2',
+                    groupValue: selectedValue,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedValue = value!;
+                      });
+                    },
+                  ),
+                ],),
+                SizedBox(
+                  height: 10,
+                ),
               ],
             ),
           ),
