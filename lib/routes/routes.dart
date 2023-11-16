@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:real_estate/auth/login.dart';
-import 'package:real_estate/home/bottom_navbar.dart';
 import 'package:real_estate/home/home_screen.dart';
+import 'package:real_estate/home/main_screen.dart';
 import 'package:real_estate/home/promotion.dart';
 import 'package:real_estate/search/search.dart';
 import 'package:real_estate/routes/routes_name.dart';
@@ -32,8 +32,8 @@ class Routes{
         return MaterialPageRoute(builder: (context) => const Promotion());
         case RoutesName.search:
         return MaterialPageRoute(builder: (context) => const Search());
-   case RoutesName.bottomNavBar:
-        return MaterialPageRoute(builder: (context) => const BottomNavBar());
+   case RoutesName.mainScreen:
+        return MaterialPageRoute(builder: (context) => const MainScreen());
 
       default:
         return MaterialPageRoute(

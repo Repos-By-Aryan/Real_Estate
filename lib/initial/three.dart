@@ -22,7 +22,7 @@ class Three extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, RoutesName.homeScreen);
+                  Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
                 },
                 child: const RoundedButton(title: "skip")),
           ),
@@ -91,7 +91,7 @@ class Three extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: InkWell(
                           onTap: (){
-                            Navigator.pushReplacementNamed(context, RoutesName.homeScreen);
+                            Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
                           },
                           child: Container(
                             width: screenWidth*0.65,

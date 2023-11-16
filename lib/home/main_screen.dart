@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate/search/search.dart';
-import 'package:real_estate/routes/routes_name.dart';
-
-import '../constants/constants.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:real_estate/constants/constants.dart';
+import 'package:real_estate/home/home_screen.dart';
+import 'package:real_estate/search/search.dart';
 
-import 'home_screen.dart';
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
+  State<MainScreen> createState() => _MainScreenState();
 }
-
-
-int currentIndex =0;
-class _BottomNavBarState extends State<BottomNavBar> {
+int currentIndex = 0;
 final screens = [
-   HomeScreen(),
-   Search(),
+  HomeScreen(),
+  Search(),
+  Text("Screen 3"),
+  Text("Screen 4"),
+
 ];
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:IndexedStack(children: screens),
+      body:screens[currentIndex],
       bottomNavigationBar: Container(
         color:navbarColor,
         child: Padding(
@@ -43,7 +43,7 @@ final screens = [
               },
               tabs: [
                 GButton(icon: Icons.home,
-                  text:"Home",active: currentIndex==0,),
+                  text:"Home",active: currentIndex == 0,),
                 GButton(icon: Icons.search,
                   text:"Search",
                   active: currentIndex == 1,),

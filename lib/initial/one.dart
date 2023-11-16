@@ -41,7 +41,7 @@ class _OneState extends State<One> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, RoutesName.homeScreen);
+                  Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
                 },
                 child: const RoundedButton(title: "skip")),
           ),
