@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/search/search.dart';
@@ -15,7 +16,7 @@ final screens = [
   HomeScreen(),
   Search(),
   Text("Screen 3"),
-  Text("Screen 4"),
+  LoginScreen(),
 
 ];
 

@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/Utils/utils.dart';
+import 'package:real_estate/routes/routes_name.dart';
+import 'package:real_estate/splash_services/splash_services.dart';
+import 'package:real_estate/constants/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "LoginScreen";
@@ -45,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = false;
       });
       Utils().toastMessage(value.user!.email.toString());
-      // if(login){Navigator.pushNamed(context, PostScreen.id);}
+      // if(()){Navigator.pushNamed(context, RoutesName.mainScreen);}
     }).onError((error, stackTrace){
       setState(() {
         loading = false;
@@ -251,6 +254,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+              ),
+            ),
+            bottomNavigationBar: Container(
+              constraints: BoxConstraints(minWidth: screenWidth*0.8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Color(0xab000000),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context,RoutesName.signUp);
+                    },
+                    child: const Text(
+                      ' Sign Up',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15,
+                        decoration: TextDecoration.underline,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

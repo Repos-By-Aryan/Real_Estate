@@ -8,6 +8,7 @@ import 'package:real_estate/search/search.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 
+import '../auth/signup.dart';
 import '../initial/one.dart';
 import '../initial/three.dart';
 import '../initial/two.dart';
@@ -34,6 +35,8 @@ class Routes{
         return MaterialPageRoute(builder: (context) => const Search());
    case RoutesName.mainScreen:
         return MaterialPageRoute(builder: (context) => const MainScreen());
+   case RoutesName.signUp:
+        return MaterialPageRoute(builder: (context) => const SignUp());
 
       default:
         return MaterialPageRoute(

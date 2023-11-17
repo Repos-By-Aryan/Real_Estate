@@ -27,7 +27,7 @@ class SignInButton extends StatelessWidget {
       width: width,
       height:height,
       decoration: BoxDecoration(
-        color: const Color(0xff606060),
+        color: const Color(0xffeeeeee),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
