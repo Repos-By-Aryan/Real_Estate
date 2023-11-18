@@ -155,30 +155,33 @@ class _SearchState extends State<Search> {
             bedroomIsChecked[index] = !bedroomIsChecked[index];
           });
         },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: bedroomIsChecked[index]
-                ? Color(0x234F68B0)
-                : Colors.transparent,
-            border: Border.all(
-              width: 0.2,
-              color: Colors.black,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                bedrooms[index],
-                style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: 'Lato',
-                  fontWeight: FontWeight.w700,
-                ),
+        child: Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: bedroomIsChecked[index]
+                  ? Color(0x234F68B0)
+                  : Colors.transparent,
+              border: Border.all(
+                width: 0.2,
+                color: Colors.black,
               ),
-            ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  bedrooms[index],
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

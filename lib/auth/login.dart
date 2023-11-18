@@ -107,16 +107,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text("Sign in to your account", style: heading),
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
                           InkWell(
-                              onTap: () {},
+                              onTap: () {
+                              },
                               child: SignInButton(
                                   title: "Sign in with Google",
                                   logo: "assets/images/GoogleIcon.png",
                                   width: screenWidth * 0.65)),
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
                           InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                _auth.signInAnonymously();
+                                if(_auth.currentUser!.isAnonymous){
+                                  Navigator.pushNamed(context, RoutesName.homeScreen);
+                                }
+                              },
                               child: SignInButton(
-                                  title: "Sign in with Apple",
+                                  title: "Continue as Guest",
                                   logo: "assets/images/AppleIcon.png",
                                   width: screenWidth * 0.65)),
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
@@ -256,37 +262,42 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            bottomNavigationBar: Container(
-              constraints: BoxConstraints(minWidth: screenWidth*0.8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Color(0xab000000),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account?",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context,RoutesName.signUp);
-                    },
-                    child: const Text(
-                      ' Sign Up',
+            bottomNavigationBar: Padding(
+              padding: EdgeInsets.symmetric(horizontal:70 ),
+              child: Container(
+                height:40,
+                constraints: BoxConstraints(minWidth: screenWidth*0.8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Color(0x55cdacbc),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                        decoration: TextDecoration.underline,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                      style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context,RoutesName.signUp);
+                      },
+                      child: const Text(
+                        ' Sign Up',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          decorationColor: Colors.white,
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

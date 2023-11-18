@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
               activeColor: theme,
               rippleColor: const Color(0x2b234f68),
               tabBackgroundColor: const Color(0x1a234f68),
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 10),
               onTabChange: (index){
                 setState(() {
                   currentIndex = index;
