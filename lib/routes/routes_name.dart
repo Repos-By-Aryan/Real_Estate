@@ -10,5 +10,7 @@ class RoutesName{
   static const splashScreen = 'splash_screen';
   static const mainScreen = 'main_screen';
   static const signUp = 'signup';
+  static const forgotPassword = 'forgotpassword';
+
 
 }

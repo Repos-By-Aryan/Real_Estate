@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/Utils/utils.dart';
 import 'package:real_estate/routes/routes_name.dart';
@@ -23,11 +23,34 @@ class _LoginScreenState extends State<LoginScreen> {
   bool loading = false;
   Color visibilityColor = const Color(0xFF62a6f7);
   bool visibility = true;
-  int count = 1;
+  int count = 0;
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  GoogleSignIn googleSignIn = GoogleSignIn();
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? user = userCredential.user;
+
+      Navigator.pushNamed(context, RoutesName.mainScreen);
+      // Use the user object for further operations or navigate to a new screen.
+    }
+    catch (e) {
+      print(e.toString());
+    }
+  }
+
 
 
   @override
@@ -54,7 +77,9 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = false;
       });
       Utils().toastMessage(error.toString());
+
     });
+      Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
   }
   @override
   Widget build(BuildContext context) {
@@ -107,7 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text("Sign in to your account", style: heading),
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
                           InkWell(
-                              onTap: () {
+                              onTap: () async{
+                                await signInWithGoogle();
                               },
                               child: SignInButton(
                                   title: "Sign in with Google",
@@ -115,15 +141,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   width: screenWidth * 0.65)),
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
                           InkWell(
-                              onTap: () {
-                                _auth.signInAnonymously();
-                                if(_auth.currentUser!.isAnonymous){
-                                  Navigator.pushNamed(context, RoutesName.homeScreen);
+                              onTap: () async {
+                                await _auth.signInAnonymously(); // Add 'await' to ensure the sign-in is completed before moving forward
+                                bool? isLogin = _auth.currentUser?.isAnonymous;
+                                if (isLogin != null && isLogin){
+                                  Navigator.pushNamed(context, RoutesName.mainScreen);
                                 }
                               },
                               child: SignInButton(
                                   title: "Continue as Guest",
-                                  logo: "assets/images/AppleIcon.png",
+                                  logo: "assets/images/Guest.png",
                                   width: screenWidth * 0.65)),
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
                           Row(
@@ -226,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              // Navigator.pushNamed(context, RoutesName.ForgotPassword);
+                              Navigator.pushNamed(context, RoutesName.forgotPassword);
                             },
                             child: const Text(
                               'Forgot Password?',

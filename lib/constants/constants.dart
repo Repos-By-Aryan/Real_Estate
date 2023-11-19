@@ -36,7 +36,7 @@ class SignInButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(logo,width: 40,height:30),
+            Image.asset(logo,width: 40,height:40),
             const SizedBox(width: 10,),
             Text(title,style: const TextStyle(fontWeight: FontWeight.bold),),
           ],

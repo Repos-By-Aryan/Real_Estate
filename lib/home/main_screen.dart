@@ -16,7 +16,8 @@ final screens = [
   HomeScreen(),
   Search(),
   Text("Screen 3"),
-  LoginScreen(),
+  Text("Screen 4"),
+
 
 ];
 

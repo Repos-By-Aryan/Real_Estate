@@ -82,7 +82,7 @@ flutter:
   assets:
     - assets/images/Backdrop.jpg
     - assets/images/GoogleIcon.png
-    - assets/images/AppleIcon.png
+    - assets/images/Guest.png
     - assets/images/Logo.png
     - assets/video/Splash.mp4
     - assets/images/one.webp
