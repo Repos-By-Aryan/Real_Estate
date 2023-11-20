@@ -71,27 +71,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset.fromDirection(120, 3.0),
-                              blurRadius: 4)
-                        ],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(200),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
+                    
+                    GestureDetector(
+                      onTap: (){
+                        // Navigator.pushNamed(),
+                      },
+                      child: Container(
+                        padding:EdgeInsets.symmetric(
                             horizontal: 12.0, vertical: 6),
-                        child: DropdownButton(
-                            iconSize: 25,
-                            items: const [
-                              DropdownMenuItem(
-                                  child: Text('New Delhi, India')),
-                            ],
-                            onChanged: (value) {}),
+                        width:150,
+                        height:50,
+                        decoration: BoxDecoration(
+                          shape:BoxShape.rectangle,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset.fromDirection(120, 3.0),
+                                blurRadius: 4)
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(200),
+                        ),
+                        child:Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.location_on_outlined),
+                            SizedBox(width:5),
+                            Center(child: Text('Location',style:text)),
+                          ],
+                        ),
                       ),
                     ),
                     Row(
@@ -193,7 +201,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-
                 const SizedBox(
                   height: 10,
                 ),
@@ -362,166 +369,134 @@ class _HomeScreenState extends State<HomeScreen> {
                               final document = snapshot.data!.docs[index];
                               final propertyType = document['type'];
                               if (propertyType['rent']) {
-                                return Container(
-                                  margin: const EdgeInsets.only(right: 14),
-                                  constraints: BoxConstraints.expand(
-                                      height: 160, width: screenWidth * 0.82),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: const Color(0xffF5F4F8),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Stack(
-                                        fit: StackFit.passthrough,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(8.0),
-                                            child: CachedNetworkImage(
-                                              imageUrl: document['image_urls']
-                                              [0]
-                                                  .toString(),
-                                              imageBuilder:
-                                                  (context, imageProvider) =>
-                                                  InkWell(
-                                                    onTap: () {},
-                                                    child: Container(
-                                                      width: (screenWidth * 0.8) *
-                                                          0.49,
-                                                      height:
-                                                      160, // Add height constraint
-                                                      decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                          image: imageProvider,
-                                                          fit: BoxFit.cover,
+                                return GestureDetector(
+                                  onTap: (){
+                                    Navigator.pushNamed(context,RoutesName.propertyDetail);
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 14),
+                                    constraints: BoxConstraints.expand(
+                                        height: 160, width: screenWidth * 0.82),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: const Color(0xffF5F4F8),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Stack(
+                                          fit: StackFit.passthrough,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.all(8.0),
+                                              child: CachedNetworkImage(
+                                                imageUrl: document['image_urls']
+                                                [0]
+                                                    .toString(),
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                    InkWell(
+                                                      onTap: () {},
+                                                      child: Container(
+                                                        width: (screenWidth * 0.8) *
+                                                            0.49,
+                                                        height:
+                                                        160, // Add height constraint
+                                                        decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                            image: imageProvider,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                          borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
                                                         ),
-                                                        borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
                                                       ),
                                                     ),
-                                                  ),
-                                              placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                              const Icon(Icons.error),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            bottom: 18,
-                                            left: 18,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color:
-                                                const Color(0xff234F68),
-                                                borderRadius:
-                                                BorderRadius.circular(15),
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 10.0,
-                                                    vertical: 4),
-                                                child: Text(
-                                                  document['category'],
-                                                  style: const TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    color: Colors.white,
-                                                    fontSize: 11,
-                                                  ),
-                                                ),
+                                                placeholder: (context, url) =>
+                                                const CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                const Icon(Icons.error),
                                               ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            top: 18,
-                                            left: 18,
-                                            child: SizedBox(
-                                              width: 23,
-                                              height: 23,
-                                              child: ElevatedButton(
-                                                style:
-                                                ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                  Colors.white,
-                                                  shape:
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        30),
-                                                  ),
+                                            Positioned(
+                                              bottom: 18,
+                                              left: 18,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                  const Color(0xff234F68),
+                                                  borderRadius:
+                                                  BorderRadius.circular(15),
                                                 ),
-                                                onPressed: () {},
-                                                child: SvgPicture.asset(
-                                                  'assets/svg/heart.svg',
-                                                  width: 25,
-                                                  height: 25,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: (screenWidth * 0.8) *
-                                            0.48, // Wrap the Text widget with Expanded
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 5.0, top: 8, bottom: 8),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(vertical: 8.0),
-                                                child: Text(
-                                                  document['title'],
-                                                  style: featuredTitle,
-                                                  maxLines: 2,
-                                                  softWrap: true,
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    child: SvgPicture.asset(
-                                                      'assets/svg/star.svg',
-                                                      width: 20,
-                                                      height: 20,
-                                                      fit: BoxFit.cover,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 4),
+                                                  child: Text(
+                                                    document['category'],
+                                                    style: const TextStyle(
+                                                      fontFamily: 'Lato',
+                                                      color: Colors.white,
+                                                      fontSize: 11,
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                    const EdgeInsets.only(
-                                                        left: 4),
-                                                    child: Text(
-                                                        document['rating']
-                                                            .toString(),
-                                                        style: ratingStyle),
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 18,
+                                              left: 18,
+                                              child: InkWell(
+                                                onTap:(){},
+                                                child: Container(
+                                                  height:30,
+                                                  width:30,
+                                                  padding:EdgeInsets.all(5),
+                                                  decoration:BoxDecoration(
+                                                    color: Colors.white,
+                                                    shape: BoxShape.circle,
                                                   ),
-                                                ],
+                                                  child: SvgPicture.asset(
+                                                    'assets/svg/heart.svg',
+                                                    width: 20,
+                                                    height: 20,
+                                                    // fit: BoxFit.contain,
+                                                  ),
+                                                ),
                                               ),
-                                              const SizedBox(
-                                                height: 2,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.only(
-                                                    left: 2.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: (screenWidth * 0.8) *
+                                              0.48, // Wrap the Text widget with Expanded
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5.0, top: 8, bottom: 8),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 8.0),
+                                                  child: Text(
+                                                    document['title'],
+                                                    style: featuredTitle,
+                                                    maxLines: 2,
+                                                    softWrap: true,
+                                                  ),
+                                                ),
+                                                Row(
                                                   children: [
                                                     SizedBox(
                                                       child: SvgPicture.asset(
-                                                        'assets/svg/location.svg',
+                                                        'assets/svg/star.svg',
                                                         width: 20,
                                                         height: 20,
                                                         fit: BoxFit.cover,
@@ -529,207 +504,206 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                      const EdgeInsets
-                                                          .only(left: 4),
+                                                      const EdgeInsets.only(
+                                                          left: 4),
                                                       child: Text(
-                                                        document['address']
-                                                        ['city']
-                                                            .toString(),
-                                                        style: ratingStyle,
-                                                        softWrap: true,
-                                                        maxLines: 2,
-                                                      ),
+                                                          document['rating']
+                                                              .toString(),
+                                                          style: ratingStyle),
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.only(
-                                                    top: 10.0),
-                                                child: RichText(
-                                                  text: TextSpan(
-                                                      text: ('Rs. ${formatValue(document[
-                                                          'price']
-                                                          ['rent']
-                                                          ['monthly']
-                                                              .toDouble())}'),
-                                                      style: boldText,
-                                                      children: [
-                                                        TextSpan(
-                                                            text: "/month",
-                                                            style: text),
-                                                      ]),
+                                                const SizedBox(
+                                                  height: 2,
                                                 ),
-                                              ),
-                                            ],
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.only(
+                                                      left: 2.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(
+                                                        child: SvgPicture.asset(
+                                                          'assets/svg/location.svg',
+                                                          width: 20,
+                                                          height: 20,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .only(left: 4),
+                                                        child: Text(
+                                                          document['address']
+                                                          ['city']
+                                                              .toString(),
+                                                          style: ratingStyle,
+                                                          softWrap: true,
+                                                          maxLines: 2,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.only(
+                                                      top: 10.0),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                        text: ('Rs. ${formatValue(document[
+                                                            'price']
+                                                            ['rent']
+                                                            ['monthly']
+                                                                .toDouble())}'),
+                                                        style: boldText,
+                                                        children: [
+                                                          TextSpan(
+                                                              text: "/month",
+                                                              style: text),
+                                                        ]),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 );
                               } else if (propertyType['sell']) {
-                                return Container(
-                                  margin: const EdgeInsets.only(right: 14),
-                                  constraints: BoxConstraints.expand(
-                                      height: 160, width: screenWidth * 0.82),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: const Color(0xffF5F4F8),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Stack(
-                                        fit: StackFit.passthrough,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(8.0),
-                                            child: CachedNetworkImage(
-                                              imageUrl: document['image_urls']
-                                              [0]
-                                                  .toString(),
-                                              imageBuilder:
-                                                  (context, imageProvider) =>
-                                                  InkWell(
-                                                    onTap: () {},
-                                                    child: Container(
-                                                      width: (screenWidth * 0.8) *
-                                                          0.49,
-                                                      height:
-                                                      160, // Add height constraint
-                                                      decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                          image: imageProvider,
-                                                          fit: BoxFit.cover,
+                                return GestureDetector(
+                                  onTap:(){
+                                    Navigator.pushNamed(context,RoutesName.propertyDetail);
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 14),
+                                    constraints: BoxConstraints.expand(
+                                        height: 160, width: screenWidth * 0.82),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: const Color(0xffF5F4F8),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Stack(
+                                          fit: StackFit.passthrough,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.all(8.0),
+                                              child: CachedNetworkImage(
+                                                imageUrl: document['image_urls']
+                                                [0]
+                                                    .toString(),
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                    InkWell(
+                                                      onTap: () {},
+                                                      child: Container(
+                                                        width: (screenWidth * 0.8) *
+                                                            0.49,
+                                                        height:
+                                                        160, // Add height constraint
+                                                        decoration: BoxDecoration(
+                                                          image: DecorationImage(
+                                                            image: imageProvider,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                          borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
                                                         ),
-                                                        borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
                                                       ),
                                                     ),
-                                                  ),
-                                              placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                              const Icon(Icons.error),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            bottom: 18,
-                                            left: 18,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color:
-                                                const Color(0xff234F68),
-                                                borderRadius:
-                                                BorderRadius.circular(15),
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 10.0,
-                                                    vertical: 4),
-                                                child: Text(
-                                                  document['category'],
-                                                  style: const TextStyle(
-                                                    fontFamily: 'Lato',
-                                                    color: Colors.white,
-                                                    fontSize: 11,
-                                                  ),
-                                                ),
+                                                placeholder: (context, url) =>
+                                                const CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                const Icon(Icons.error),
                                               ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            top: 18,
-                                            left: 18,
-                                            child: SizedBox(
-                                              width: 23,
-                                              height: 23,
-                                              child: ElevatedButton(
-                                                style:
-                                                ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                  Colors.white,
-                                                  shape:
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        30),
-                                                  ),
+                                            Positioned(
+                                              bottom: 18,
+                                              left: 18,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                  const Color(0xff234F68),
+                                                  borderRadius:
+                                                  BorderRadius.circular(15),
                                                 ),
-                                                onPressed: () {},
-                                                child: SvgPicture.asset(
-                                                  'assets/svg/heart.svg',
-                                                  width: 25,
-                                                  height: 25,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: (screenWidth * 0.8) *
-                                            0.48, // Wrap the Text widget with Expanded
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 5.0, top: 8, bottom: 8),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(vertical: 8.0),
-                                                child: Text(
-                                                  document['title'],
-                                                  style: featuredTitle,
-                                                  maxLines: 2,
-                                                  softWrap: true,
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    child: SvgPicture.asset(
-                                                      'assets/svg/star.svg',
-                                                      width: 20,
-                                                      height: 20,
-                                                      fit: BoxFit.cover,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 4),
+                                                  child: Text(
+                                                    document['category'],
+                                                    style: const TextStyle(
+                                                      fontFamily: 'Lato',
+                                                      color: Colors.white,
+                                                      fontSize: 11,
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                    const EdgeInsets.only(
-                                                        left: 4),
-                                                    child: Text(
-                                                        document['rating']
-                                                            .toString(),
-                                                        style: ratingStyle),
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 18,
+                                              left: 18,
+                                              child: InkWell(
+                                                onTap:(){},
+                                                child: Container(
+                                                  height:25,
+                                                  width:25,
+                                                  padding:EdgeInsets.all(5),
+                                                  decoration:BoxDecoration(
+                                                    color: Colors.white,
+                                                    shape: BoxShape.circle,
                                                   ),
-                                                ],
+                                                  child: SvgPicture.asset(
+                                                    'assets/svg/heart.svg',
+                                                    width: 20,
+                                                    height: 20,
+                                                    // fit: BoxFit.contain,
+                                                  ),
+                                                ),
                                               ),
-                                              const SizedBox(
-                                                height: 2,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.only(
-                                                    left: 2.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: (screenWidth * 0.8) *
+                                              0.48, // Wrap the Text widget with Expanded
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 5.0, top: 8, bottom: 8),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 8.0),
+                                                  child: Text(
+                                                    document['title'],
+                                                    style: featuredTitle,
+                                                    maxLines: 2,
+                                                    softWrap: true,
+                                                  ),
+                                                ),
+                                                Row(
                                                   children: [
                                                     SizedBox(
                                                       child: SvgPicture.asset(
-                                                        'assets/svg/location.svg',
+                                                        'assets/svg/star.svg',
                                                         width: 20,
                                                         height: 20,
                                                         fit: BoxFit.cover,
@@ -737,41 +711,72 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                      const EdgeInsets
-                                                          .only(left: 4),
+                                                      const EdgeInsets.only(
+                                                          left: 4),
                                                       child: Text(
-                                                        document['address']
-                                                        ['city']
-                                                            .toString(),
-                                                        style: ratingStyle,
-                                                        softWrap: true,
-                                                        maxLines: 2,
-                                                      ),
+                                                          document['rating']
+                                                              .toString(),
+                                                          style: ratingStyle),
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.only(
-                                                    top: 10.0),
-                                                child: RichText(
-                                                  text: TextSpan(
-                                                      text: ('Rs. ${formatValue(document[
-                                                          'price']
-                                                          ['sell']
-                                                              .toDouble())}'),
-                                                      style: boldText,
-                                                      children: const [
-                                                        // TextSpan(text:"/month",style: text),
-                                                      ]),
+                                                const SizedBox(
+                                                  height: 2,
                                                 ),
-                                              ),
-                                            ],
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.only(
+                                                      left: 2.0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(
+                                                        child: SvgPicture.asset(
+                                                          'assets/svg/location.svg',
+                                                          width: 20,
+                                                          height: 20,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .only(left: 4),
+                                                        child: Text(
+                                                          document['address']
+                                                          ['city']
+                                                              .toString(),
+                                                          style: ratingStyle,
+                                                          softWrap: true,
+                                                          maxLines: 2,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.only(
+                                                      top: 10.0),
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                        text: ('Rs. ${formatValue(document[
+                                                            'price']
+                                                            ['sell']
+                                                                .toDouble())}'),
+                                                        style: boldText,
+                                                        children: const [
+                                                          // TextSpan(text:"/month",style: text),
+                                                        ]),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 );
                               }

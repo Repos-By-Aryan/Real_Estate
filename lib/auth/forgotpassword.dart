@@ -85,7 +85,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 height: 50,
                 width: 300,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF62a6f7),
+                  color: Colors.black,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextButton(
@@ -116,10 +116,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     )
                         : const Text(
                       'Reset',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'Rubik Regular',
-                          color: Colors.white),
+                      style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontFamily:'Lato' ,fontSize: 15)
                     ),
                   ),
                 ),

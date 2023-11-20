@@ -11,6 +11,8 @@ class RoutesName{
   static const mainScreen = 'main_screen';
   static const signUp = 'signup';
   static const forgotPassword = 'forgotpassword';
+  static const propertyDetail = 'property_detail';
+
 
 
 }

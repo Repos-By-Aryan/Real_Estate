@@ -142,11 +142,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
                           InkWell(
                               onTap: () async {
-                                await _auth.signInAnonymously(); // Add 'await' to ensure the sign-in is completed before moving forward
-                                bool? isLogin = _auth.currentUser?.isAnonymous;
-                                if (isLogin != null && isLogin){
-                                  Navigator.pushNamed(context, RoutesName.mainScreen);
-                                }
+                                // await _auth.signInAnonymously(); // Add 'await' to ensure the sign-in is completed before moving forward
+                                // bool? isLogin = _auth.currentUser?.isAnonymous;
+                                // if (isLogin != null && isLogin){
+                                //   Navigator.pushNamed(context, RoutesName.mainScreen);
+                                // }
+                                Navigator.pushNamed(context, RoutesName.mainScreen);
                               },
                               child: SignInButton(
                                   title: "Continue as Guest",

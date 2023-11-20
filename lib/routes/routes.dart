@@ -4,6 +4,7 @@ import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/home/main_screen.dart';
 import 'package:real_estate/home/promotion.dart';
+import 'package:real_estate/home/property_detail.dart';
 import 'package:real_estate/search/search.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
@@ -39,6 +40,10 @@ class Routes {
       case RoutesName.forgotPassword:
         return MaterialPageRoute(
             builder: (context) => const ForgotPasswordScreen());
+      case RoutesName.propertyDetail:
+        return MaterialPageRoute(
+            builder: (context) => const PropertyDetail());
+
 
       default:
         return MaterialPageRoute(builder: (context) {
