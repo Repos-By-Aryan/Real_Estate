@@ -51,6 +51,7 @@ dependencies:
   intl: ^0.18.1
   readmore: ^2.2.0
   google_sign_in: ^6.1.6
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_native_splash: ^2.3.2
