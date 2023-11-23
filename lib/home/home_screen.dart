@@ -366,8 +366,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? snapshot.data!.docs.length
                                 : 4,
                             itemBuilder: (context, index) {
-                              final document = snapshot.data!.docs[index];
-                              final propertyType = document['type'];
+                                final document = snapshot.data!.docs[index];
+                                final propertyType = document['type'];
                               if (propertyType['rent']) {
                                 return GestureDetector(
                                   onTap: (){
