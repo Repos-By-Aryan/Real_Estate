@@ -92,6 +92,7 @@ flutter:
     - assets/images/three.jpg
     - assets/images/Homebackdrop.png
     - assets/svg/heart.svg
+    - assets/images/heart.png
     - assets/svg/star.svg
     - assets/svg/location.svg
     - assets/svg/ticket.svg

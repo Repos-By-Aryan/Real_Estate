@@ -5,10 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/constants.dart';
 bool active = false;
-class PropertyDetail extends StatelessWidget {
+class PropertyDetail extends StatefulWidget {
   const PropertyDetail({super.key});
 
+  @override
+  State<PropertyDetail> createState() => _PropertyDetailState();
+}
 
+class _PropertyDetailState extends State<PropertyDetail> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -33,7 +37,7 @@ class PropertyDetail extends StatelessWidget {
               SizedBox(
                 height: screenHeight * 0.01,
               ),
-              
+
               Stack(
                 children:[
                   StreamBuilder(
@@ -93,17 +97,17 @@ class PropertyDetail extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            setState(){
-                              active = true;
-                            };
+                            setState(() {
+                              active=!active;
+                            });
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff8ac73f),
+                            backgroundColor: active?const Color(0xff8ac73f):const Color(0xcbffffff),
                             elevation: 0.2,
                             shape: const CircleBorder(),
                             padding: const EdgeInsets.all(12),
                           ),
-                          child: active?SvgPicture.asset('assets/svg/heart_w.svg',width: 25,),
+                          child: active?SvgPicture.asset('assets/svg/heart_w.svg',width: 25,):Image.asset('assets/images/heart.png'),
                         ),
                       ],
                     ),
