@@ -11,7 +11,7 @@ class PropertyDetail extends StatefulWidget {
   @override
   State<PropertyDetail> createState() => _PropertyDetailState();
 }
-
+int currentIndex= 0;
 class _PropertyDetailState extends State<PropertyDetail> {
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,7 @@ class _PropertyDetailState extends State<PropertyDetail> {
                 children:[
                   StreamBuilder(
                     stream: firestore,
-
                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-
                       if (snapshot.connectionState ==
                           ConnectionState.waiting) {
                         return const Center(
@@ -54,9 +52,24 @@ class _PropertyDetailState extends State<PropertyDetail> {
                         return const Text("An error occurred.");
                       }
                       return SizedBox(
+                        height: screenHeight>2100?screenHeight*0.5:screenHeight*0.4,
                         width: double.infinity,
-                        height:180,
-                        child: CarouselSlider(items:[] , options: CarouselOptions(),),
+                        child: ListView.builder(
+                            shrinkWrap: false,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 2,
+                            itemBuilder: (context, index) {
+                              final document = snapshot.data!.docs[0];
+                              final imageList = document['image_urls'];
+                              return GestureDetector(
+                                child: Container(
+                                  width: screenWidth,
+                                  margin: EdgeInsets.only(right:10),
+                                  constraints: BoxConstraints.tightForFinite(),
+                                  child:InteractiveViewer(child: Image.network(imageList[index])),
+                                ),
+                              );
+                            }),
                       );
                       },
                   ),
@@ -107,7 +120,7 @@ class _PropertyDetailState extends State<PropertyDetail> {
                             shape: const CircleBorder(),
                             padding: const EdgeInsets.all(12),
                           ),
-                          child: active?SvgPicture.asset('assets/svg/heart_w.svg',width: 25,):Image.asset('assets/images/heart.png'),
+                          child: active?SvgPicture.asset('assets/svg/heart_w.svg',width: 25,):Image.asset('assets/images/heart.png',width: 25),
                         ),
                       ],
                     ),
