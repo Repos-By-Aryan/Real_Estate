@@ -40,39 +40,39 @@ class _PropertyDetailState extends State<PropertyDetail> {
 
               Stack(
                 children:[
-                  StreamBuilder(
-                    stream: firestore,
-                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-                      if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
-                        return const Center(
-                            child: CircularProgressIndicator());
-                      }
-                      if (snapshot.hasError) {
-                        return const Text("An error occurred.");
-                      }
-                      return SizedBox(
-                        height: screenHeight>2100?screenHeight*0.5:screenHeight*0.4,
-                        width: double.infinity,
-                        child: ListView.builder(
-                            shrinkWrap: false,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 2,
-                            itemBuilder: (context, index) {
-                              final document = snapshot.data!.docs[0];
-                              final imageList = document['image_urls'];
-                              return GestureDetector(
-                                child: Container(
-                                  width: screenWidth,
-                                  margin: EdgeInsets.only(right:10),
-                                  constraints: BoxConstraints.tightForFinite(),
-                                  child:InteractiveViewer(child: Image.network(imageList[index])),
-                                ),
-                              );
-                            }),
-                      );
-                      },
-                  ),
+                  // StreamBuilder(
+                  //   stream: firestore,
+                  //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                  //     if (snapshot.connectionState ==
+                  //         ConnectionState.waiting) {
+                  //       return const Center(
+                  //           child: CircularProgressIndicator());
+                  //     }
+                  //     if (snapshot.hasError) {
+                  //       return const Text("An error occurred.");
+                  //     }
+                  //     return SizedBox(
+                  //       height: screenHeight>2100?screenHeight*0.5:screenHeight*0.4,
+                  //       width: double.infinity,
+                  //       child: ListView.builder(
+                  //           shrinkWrap: false,
+                  //           scrollDirection: Axis.horizontal,
+                  //           itemCount: snapshot.data!.docs.length,,
+                  //           itemBuilder: (context, index) {
+                  //             final document = snapshot.data!.docs[index];
+                  //             final imageList = document['image_urls'];
+                  //             return GestureDetector(
+                  //               child: Container(
+                  //                 width: screenWidth,
+                  //                 margin: EdgeInsets.only(right:10),
+                  //                 constraints: BoxConstraints.tightForFinite(),
+                  //                 child:InteractiveViewer(child: Image.network(imageList[index])),
+                  //               ),
+                  //             );
+                  //           }),
+                  //     );
+                  //     },
+                  // ),
                   Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

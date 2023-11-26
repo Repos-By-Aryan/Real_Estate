@@ -12,6 +12,7 @@ class RoutesName{
   static const signUp = 'signup';
   static const forgotPassword = 'forgotpassword';
   static const propertyDetail = 'property_detail';
+  static const locationScreen = 'location';
 
 
 

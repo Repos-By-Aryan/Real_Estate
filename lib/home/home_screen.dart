@@ -74,12 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     
                     GestureDetector(
                       onTap: (){
-                        // Navigator.pushNamed(),
+                        Navigator.pushNamed(context,RoutesName.locationScreen);
                       },
                       child: Container(
                         padding:EdgeInsets.symmetric(
                             horizontal: 12.0, vertical: 6),
-                        width:150,
+                        width:130,
                         height:50,
                         decoration: BoxDecoration(
                           shape:BoxShape.rectangle,
@@ -95,9 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         child:Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.location_on_outlined),
-                            SizedBox(width:5),
-                            Center(child: Text('Location',style:text)),
+                          SvgPicture.asset(
+                          'assets/svg/location.svg',
+                          width: 25,
+                          height: 25,
+                          fit: BoxFit.cover,
+                        ),
+                            SizedBox(width:7),
+                            Center(child: Text('Location',style:TextStyle(fontFamily: 'Lato',color:Colors.black87))),
                           ],
                         ),
                       ),
@@ -911,8 +916,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                             onPressed: () {},
-                                            child: SvgPicture.asset(
-                                              'assets/svg/heart.svg',
+                                            child: Image.asset(
+                                              'assets/svg/heart.png',
                                               width: 25,
                                               height: 25,
                                               fit: BoxFit.cover,

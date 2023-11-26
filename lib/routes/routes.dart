@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/auth/forgotpassword.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/home/home_screen.dart';
+import 'package:real_estate/home/location_screen.dart';
 import 'package:real_estate/home/main_screen.dart';
 import 'package:real_estate/home/promotion.dart';
 import 'package:real_estate/home/property_detail.dart';
@@ -40,6 +41,9 @@ class Routes {
       case RoutesName.forgotPassword:
         return MaterialPageRoute(
             builder: (context) => const ForgotPasswordScreen());
+        case RoutesName.locationScreen:
+        return MaterialPageRoute(
+            builder: (context) => LocationScreen());
       case RoutesName.propertyDetail:
         return MaterialPageRoute(
             builder: (context) => const PropertyDetail());
