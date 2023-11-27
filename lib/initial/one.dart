@@ -39,7 +39,7 @@ class _OneState extends State<One> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: InkWell(
+            child: GestureDetector(
                 onTap: () {
                   Navigator.pushReplacementNamed(context, RoutesName.login);
                 },
