@@ -6,24 +6,24 @@ import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/search/search.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  dynamic data;
+  MainScreen({super.key,this.data});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 int currentIndex = 0;
-final screens = [
-  HomeScreen(),
-  Search(),
-  Text("Screen 3"),
-  Text("Screen 4"),
 
-
-];
 
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
+    final screens = [
+      HomeScreen(data: widget.data),
+      Search(),
+      Text("Screen 3"),
+      Text("Screen 4"),
+    ];
     return Scaffold(
       body:screens[currentIndex],
       bottomNavigationBar: Container(

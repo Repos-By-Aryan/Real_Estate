@@ -21,7 +21,7 @@ class Routes {
       case RoutesName.splashScreen:
         return MaterialPageRoute(builder: (context) => const SplashScreen());
       case RoutesName.homeScreen:
-        return MaterialPageRoute(builder: (context) => const HomeScreen());
+        return MaterialPageRoute(builder: (context) =>  HomeScreen(data: settings.arguments as Map));
       case RoutesName.login:
         return MaterialPageRoute(builder: (context) => const LoginScreen());
       case RoutesName.one:
@@ -35,7 +35,7 @@ class Routes {
       case RoutesName.search:
         return MaterialPageRoute(builder: (context) => const Search());
       case RoutesName.mainScreen:
-        return MaterialPageRoute(builder: (context) => const MainScreen());
+        return MaterialPageRoute(builder: (context) =>  MainScreen(data: settings.arguments as Map));
       case RoutesName.signUp:
         return MaterialPageRoute(builder: (context) => const SignUp());
       case RoutesName.forgotPassword:

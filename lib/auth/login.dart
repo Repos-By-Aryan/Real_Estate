@@ -43,7 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
       final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
       final User? user = userCredential.user;
 
-      Navigator.pushNamed(context, RoutesName.mainScreen);
+      Navigator.pushNamed(context, RoutesName.mainScreen,arguments:{
+        'username' : googleSignIn.currentUser!.displayName.toString()+"\n",
+      });
       // Use the user object for further operations or navigate to a new screen.
     }
     catch (e) {

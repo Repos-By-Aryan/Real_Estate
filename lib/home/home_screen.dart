@@ -11,7 +11,9 @@ import 'package:real_estate/routes/routes_name.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
-  const HomeScreen({super.key});
+
+  dynamic data;
+   HomeScreen({super.key, this.data});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -146,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 RichText(
                   maxLines: 3,
-                  text: const TextSpan(
+                  text:  TextSpan(
                       text: "Hey, ",
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -155,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "Guest!\n",
+                          text: widget.data['username']!=null?widget.data['username']:"Guest\n",
                           style: TextStyle(
                             color: Color(0xff234F68),
                             fontWeight: FontWeight.w900,
