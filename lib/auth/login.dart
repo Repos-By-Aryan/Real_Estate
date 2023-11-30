@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final User? user = userCredential.user;
 
       Navigator.pushNamed(context, RoutesName.mainScreen,arguments:{
-        'username' : googleSignIn.currentUser!.displayName.toString()+"\n",
+        'username' : googleSignIn.currentUser!.displayName.toString()+"!\n",
       });
       // Use the user object for further operations or navigate to a new screen.
     }
@@ -149,7 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 // if (isLogin != null && isLogin){
                                 //   Navigator.pushNamed(context, RoutesName.mainScreen);
                                 // }
-                                Navigator.pushNamed(context, RoutesName.mainScreen);
+                                Navigator.pushNamed(context, RoutesName.mainScreen,arguments: {
+                                  'username':'Guest!\n',
+                                });
                               },
                               child: SignInButton(
                                   title: "Continue as Guest",

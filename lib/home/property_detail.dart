@@ -19,7 +19,7 @@ class _PropertyDetailState extends State<PropertyDetail> {
     final screenHeight = MediaQuery.of(context).size.height;
     final firestore =
     FirebaseFirestore.instance.collection('listings').snapshots();
-    CollectionReference ref = FirebaseFirestore.instance.collection('users');
+    final fi
     return Container(
     width: screenWidth,
     height: screenHeight,
@@ -40,39 +40,7 @@ class _PropertyDetailState extends State<PropertyDetail> {
 
               Stack(
                 children:[
-                  // StreamBuilder(
-                  //   stream: firestore,
-                  //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-                  //     if (snapshot.connectionState ==
-                  //         ConnectionState.waiting) {
-                  //       return const Center(
-                  //           child: CircularProgressIndicator());
-                  //     }
-                  //     if (snapshot.hasError) {
-                  //       return const Text("An error occurred.");
-                  //     }
-                  //     return SizedBox(
-                  //       height: screenHeight>2100?screenHeight*0.5:screenHeight*0.4,
-                  //       width: double.infinity,
-                  //       child: ListView.builder(
-                  //           shrinkWrap: false,
-                  //           scrollDirection: Axis.horizontal,
-                  //           itemCount: snapshot.data!.docs.length,,
-                  //           itemBuilder: (context, index) {
-                  //             final document = snapshot.data!.docs[index];
-                  //             final imageList = document['image_urls'];
-                  //             return GestureDetector(
-                  //               child: Container(
-                  //                 width: screenWidth,
-                  //                 margin: EdgeInsets.only(right:10),
-                  //                 constraints: BoxConstraints.tightForFinite(),
-                  //                 child:InteractiveViewer(child: Image.network(imageList[index])),
-                  //               ),
-                  //             );
-                  //           }),
-                  //     );
-                  //     },
-                  // ),
+                  Image.network(),
                   Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: widget.data['username']!=null?widget.data['username']:"Guest\n",
+                          text:widget.data['username'],
                           style: TextStyle(
                             color: Color(0xff234F68),
                             fontWeight: FontWeight.w900,
