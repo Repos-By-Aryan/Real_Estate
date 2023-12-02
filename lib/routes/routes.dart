@@ -46,7 +46,7 @@ class Routes {
             builder: (context) => LocationScreen());
       case RoutesName.propertyDetail:
         return MaterialPageRoute(
-            builder: (context) => const PropertyDetail());
+            builder: (context) =>  PropertyDetail(data: settings.arguments as Map));
 
 
       default:
