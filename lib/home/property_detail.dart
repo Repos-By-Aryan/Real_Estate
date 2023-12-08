@@ -15,9 +15,49 @@ class PropertyDetail extends StatefulWidget {
 }
 int currentIndex= 0;
 List imageUrls =[];
-
+int selectedCard =0;
+final filters = ['Buy', 'Rent'];
 
 class _PropertyDetailState extends State<PropertyDetail> {
+  String formatValue(var value) {
+    if (value >= 10000000) {
+      double valueInCr = value / 10000000.0;
+      return '${valueInCr.toStringAsFixed(1)} Cr';
+    } else if (value >= 100000) {
+      double valueInL = value / 100000.0;
+      return '${valueInL.toStringAsFixed(1)} L';
+    } else if (value >= 1000) {
+      double valueInK = value / 1000.0;
+      return '${valueInK.toStringAsFixed(1)} k';
+    } else {
+      return value.toString();
+    }
+  }
+  Widget buildFilterCard(int index) {
+    Color cardColor =
+    index == selectedCard ? const Color(0xff234F68) : Colors.white;
+    Color textColor = index == selectedCard ? Colors.white : Colors.black;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedCard = index;
+        });
+      },
+      child: Card(
+        margin: const EdgeInsets.only(right: 7),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        elevation: 5,
+        color: cardColor,
+        shadowColor: cardColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18),
+          child: Center(child: Text(filters[index], style: TextStyle(color: textColor))),
+        ),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -50,7 +90,6 @@ class _PropertyDetailState extends State<PropertyDetail> {
             (doc) => doc.id == widget.data['id'],
           );
           // Populate the list with data from Firestore
-          if (desiredDocument != null) {
             var imageArray = List<String>.from(
                 desiredDocument['image_urls']); // Retrieve the image_urls array
             var id = desiredDocument.id; // Use doc.id to get the document ID
@@ -224,15 +263,62 @@ class _PropertyDetailState extends State<PropertyDetail> {
                         SizedBox(
                           height: screenHeight * 0.04,
                         ),
-                        Row(),
-                      ],
-                    ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              desiredDocument.get('title').toString(),
+                              style: subheading,
+                            ),
+                            Text(
+                                  (desiredDocument.get('type')['rent']
+                                      ? formatValue(desiredDocument.get('price')['rent'])
+                                      : formatValue(desiredDocument.get('price')['sell'])),
+                              style: subheading,
+                            ),
+
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  child: SvgPicture.asset(
+                                    'assets/svg/location.svg',
+                                    width: 20,
+                                    height: 20,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  desiredDocument
+                                          .get('address')['locality']
+                                          .toString() +
+                                      ', ' +
+                                      desiredDocument
+                                          .get('address')['city']
+                                          .toString(),
+                                  style: text,
+                                ),
+                              ],
+                            ),
+                            Text(
+                              desiredDocument.get('type')['rent']
+                                  ? 'per month'
+                                  : '',
+                              style: text,
+                            ),
+                      ],),
+                    ],),
                   ),
                 ),
               ),
             );
-          }
-          return Container();
         });
   }
 }
