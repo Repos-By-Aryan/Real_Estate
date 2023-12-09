@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 const Color theme = Color(0xff234F68);
 const Color navbarColor = Color(0xe5ffffff);
+const Color greenTheme =  Color(0xff8ac73f);
 const Color grey = Color(0xffF5F4F8);
 var saleTextStyle = const TextStyle(fontFamily: 'Lato', fontWeight: FontWeight.w700, color: Colors.white, fontSize: 30,);
 var heading = const TextStyle(fontFamily:'Lato',fontWeight: FontWeight.w900,fontSize: 23,color: Colors.black);

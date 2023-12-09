@@ -463,7 +463,7 @@ class _SearchState extends State<Search> {
                   width: screenWidth*0.65,
                   height:50,
                   decoration: BoxDecoration(
-                    color: Color(0xff8bc83f),
+                    color: greenTheme,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
