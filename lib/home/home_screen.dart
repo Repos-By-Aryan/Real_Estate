@@ -527,7 +527,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: subheading,
                     ),
                     TextButton(
-                        onPressed: () {}, child: Text('View all', style: text)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, RoutesName.allproperty,arguments: {
+                            'name': 'Featured Estates',
+                          },);
+                        }, child: Text('View all', style: text)),
                   ],
                 ),
                 const SizedBox(
@@ -577,7 +581,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: subheading,
                     ),
                     TextButton(
-                        onPressed: () {}, child: Text('View all', style: text)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, RoutesName.allproperty,arguments: {
+                            'name': 'Explore Estates',
+                          },);
+                        }, child: Text('View all', style: text)),
                   ],
                 ),
                 StreamBuilder(

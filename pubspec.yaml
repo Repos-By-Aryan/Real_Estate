@@ -102,6 +102,7 @@ flutter:
     - assets/svg/calender.svg
     - assets/svg/heart_w.svg
     - assets/images/propDetailMap.png
+    - assets/images/viewAll.png
 #    - lib/main.dart
 
   # An image asset can refer to one or more resolution-specific "variants", see

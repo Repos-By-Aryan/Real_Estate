@@ -31,6 +31,7 @@ class _OneState extends State<One> {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 70,
         leading: Padding(
           padding: const EdgeInsets.only(left: 10.0),
           child: Image.asset('assets/images/Logo.png'),

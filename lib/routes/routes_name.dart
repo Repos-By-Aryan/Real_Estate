@@ -13,7 +13,5 @@ class RoutesName{
   static const forgotPassword = 'forgotpassword';
   static const propertyDetail = 'property_detail';
   static const locationScreen = 'location';
-
-
-
+  static const allproperty = 'view_all';
 }
