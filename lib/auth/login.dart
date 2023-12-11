@@ -82,8 +82,11 @@ class _LoginScreenState extends State<LoginScreen> {
       Utils().toastMessage(error.toString());
 
     });
-      Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
+      Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {
+        'username':emailController.text.split('@')[0].toString() + "\n",
+      });
   }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
