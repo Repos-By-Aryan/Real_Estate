@@ -57,11 +57,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-// child: Lottie.network(
-//     "https://lottie.host/d948f6e8-a420-4793-818a-7db0eff1e61b/pS6E5OaiTA.json",
-//     width: 200 ,
-//     height:200,
-//     fit: BoxFit.cover,
-//   repeat: true,
-// ),

@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: true,
       title: 'Real Estate',
       theme: ThemeData(
         fontFamily: 'Lato',
@@ -33,14 +34,6 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: RoutesName.splashScreen,
       onGenerateRoute: Routes.generateRoute,
-      // routes: {
-      //   SplashScreen.id:(context) => const SplashScreen(),
-      //   LoginScreen.id:(context) => const LoginScreen(),
-      //   HomeScreen.id:(context) => const HomeScreen(),
-      //   One.id:(context) => const One(),
-      //   Two.id:(context) => const Two(),
-      //   Three.id:(context) => const Three(),
-      // },
     );
   }
 }
