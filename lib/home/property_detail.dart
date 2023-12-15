@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:real_estate/search/search.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../constants/constants.dart';
 
@@ -56,7 +57,7 @@ class _PropertyDetailState extends State<PropertyDetail> {
         stream: firestore,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator(); // or a loading indicator
+            return const Center(child: CircularProgressIndicator()); // or a loading indicator
           }
 
           if (snapshot.hasError) {
@@ -116,9 +117,9 @@ class _PropertyDetailState extends State<PropertyDetail> {
                                 widthAnimation: 50),
                             height: screenHeight * 0.5,
                             activeColor: theme,
-                            disableColor: Colors.white,
+                            disableColor: Colors.transparent,
                             animation: true,
-                            borderRadius: screenHeight * 0.05,
+                            borderRadius: 10,
                             indicatorBottom: false,
                           ),
                           Row(
@@ -144,7 +145,7 @@ class _PropertyDetailState extends State<PropertyDetail> {
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
-
+                                      Share.share('Check out my real estate app - iConicFeed. and enjoy hassle free property exploration.', subject: 'Look what I made!');
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xcbffffff),
