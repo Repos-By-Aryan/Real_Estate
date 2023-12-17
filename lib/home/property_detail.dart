@@ -1,8 +1,8 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:real_estate/search/search.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../constants/constants.dart';
@@ -451,28 +451,126 @@ class _PropertyDetailState extends State<PropertyDetail> {
                         height: 10,
                       ),
                       Center(
-                         child: Container(
-                           padding: EdgeInsets.symmetric(horizontal: 30),
-                              width: screenWidth*0.8,
-                              height: 85,
-                              decoration:BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  color: grey),
-                           child:Column(
-                             mainAxisAlignment: MainAxisAlignment.center,
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               RichText(text: TextSpan(text: '₹ 30k ',style: boldText,children: [
-                                 TextSpan(text: "/month",style:text),
-                               ]),
-                               ),
-                               Text('From average citizen spend around this location',style:text,),
-                             ],
-                             ),
-                           ),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          width: screenWidth * 0.8,
+                          height: 85,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: grey),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                    text: '₹ 30k ',
+                                    style: boldText,
+                                    children: [
+                                      TextSpan(text: "/month", style: text),
+                                    ]),
+                              ),
+                              Text(
+                                'From average citizen spend around this location',
+                                style: text,
+                              ),
+                            ],
                           ),
+                        ),
+                      ),
                       SizedBox(
-                        height: screenHeight*0.1,
+                        height: 10,
+                      ),
+                      Text(
+                        'Rating',
+                        style: subheading,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Center(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          width: screenWidth * 0.85,
+                          height: 85,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Color(0xaf1f4c6b)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0x40000000),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SvgPicture.asset(
+                                    'assets/svg/star.svg',
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 2,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      RatingBar.builder(
+                                        initialRating:
+                                            desiredDocument.get('rating'),
+                                        minRating: 1,
+                                        direction: Axis.horizontal,
+                                        allowHalfRating: true,
+                                        itemCount: 5,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 1.0),
+                                        itemBuilder: (context, _) => Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
+                                        ),
+                                        updateOnDrag: true,
+                                        glowColor: Colors.orange,
+                                        itemSize: 25,
+                                        onRatingUpdate: (rating) {
+                                          print(rating);
+                                        },
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 4),
+                                        child: Text(
+                                          desiredDocument
+                                              .get('rating')
+                                              .toString(),
+                                          style: const TextStyle(
+                                            fontFamily: 'Lato',
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    '  From average reviews',
+                                    style: text,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: screenHeight * 0.1,
                       ),
                     ],
                   ),

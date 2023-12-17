@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/routes/routes_name.dart';
 
@@ -33,6 +34,33 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
   int currentIndex = 0;
   int selectedCard = 0;
   final filters = ['All', 'House', 'Apartment', 'Villa'];
@@ -44,6 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final firestore =
         FirebaseFirestore.instance.collection('listings').snapshots();
     final _auth = FirebaseAuth.instance;
+
+    _determinePosition();
 
     Widget buildPropertyCard(
       BuildContext context,

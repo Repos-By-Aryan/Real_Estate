@@ -1,9 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:real_estate/firebase_options.dart';
 import 'package:real_estate/routes/routes.dart';
 import 'package:real_estate/routes/routes_name.dart';
-import 'package:flutter/services.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +24,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       title: 'Real Estate',
       theme: ThemeData(
         fontFamily: 'Lato',
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xffedf4ff)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffedf4ff)),
         useMaterial3: true,
       ),
       initialRoute: RoutesName.splashScreen,

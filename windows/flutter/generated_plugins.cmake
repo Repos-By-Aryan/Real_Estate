@@ -3,13 +3,14 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  file_selector_windows
-  firebase_auth
-  firebase_core
-  modal_progress_hud_nsn
-  share_plus
-  url_launcher_windows
-)
+        file_selector_windows
+        firebase_auth
+        firebase_core
+        geolocator_windows
+        modal_progress_hud_nsn
+        share_plus
+        url_launcher_windows
+        )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
 )
