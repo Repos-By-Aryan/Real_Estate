@@ -21,8 +21,8 @@ class _MainScreenState extends State<MainScreen> {
     final screens = [
       HomeScreen(data: widget.data),
       Search(),
-      Center(child: Text("Liked Screen")),
-      Center(child: Text("Account Screen")),
+      Center(child: Text("Your likes appear here")),
+      Center(child: Text("Your Account Info")),
     ];
     return Scaffold(
       body:screens[currentIndex],

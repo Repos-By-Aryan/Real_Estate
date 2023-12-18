@@ -8,6 +8,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/routes/routes_name.dart';
 
+import '../Utils/utils.dart';
+
 class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
 
@@ -338,6 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ElevatedButton(
                           onPressed: () async {
                             await _auth.signOut();
+                            Utils().toastMessage('Signed out successfully');
                             Navigator.pushNamed(context,RoutesName.login);
                           },
                           style: ElevatedButton.styleFrom(
@@ -411,11 +414,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       EdgeInsets.symmetric(horizontal: 2.0),
                                   child: Text('Search Apartment, House, etc.')),
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(18.0),
-                              child: Icon(Icons.mic_none_outlined,
-                                  color: Colors.black),
-                            ),
+                            // Padding(
+                            //   padding: EdgeInsets.all(18.0),
+                            //   child: Icon(Icons.mic_none_outlined,
+                            //       color: Colors.black),
+                            // ),
                           ],
                         ),
                       ),

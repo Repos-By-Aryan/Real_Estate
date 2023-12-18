@@ -8,6 +8,7 @@ import 'package:real_estate/home/promotion.dart';
 import 'package:real_estate/home/property_detail.dart';
 import 'package:real_estate/home/view_all.dart';
 import 'package:real_estate/routes/routes_name.dart';
+import 'package:real_estate/search/location_results.dart';
 import 'package:real_estate/search/search.dart';
 import 'package:real_estate/splash_services/splash_screen.dart';
 
@@ -53,6 +54,10 @@ class Routes {
           return MaterialPageRoute(
             builder: (context) =>
                 ViewAll(data: settings.arguments as Map));
+          case RoutesName.locationResult:
+          return MaterialPageRoute(
+            builder: (context) =>
+                LocationResultScreen(data: settings.arguments as Map));
 
       default:
         return MaterialPageRoute(builder: (context) {

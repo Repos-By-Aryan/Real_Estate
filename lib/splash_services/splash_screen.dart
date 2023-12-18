@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/routes/routes_name.dart';
+import 'package:real_estate/splash_services/splash_services.dart';
 import 'package:video_player/video_player.dart';
+
+var splashService = SplashServices();
 
 class SplashScreen extends StatefulWidget {
   static const String id = "SplashScreen";
@@ -16,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
     _controller = VideoPlayerController.asset('assets/video/Splash.mp4')
       ..initialize().then((_) {
         setState(() {});
@@ -35,7 +37,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void _playVideo()async{
     _controller.play();
     await Future.delayed(const Duration(seconds: 4));
-    // ignore: use_build_context_synchronously
+    // if(splashService.isLogin(context)){
+    //   Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {
+    //     'username':""
+    //   });
+    // }
     Navigator.pushReplacementNamed(context, RoutesName.one);
   }
 

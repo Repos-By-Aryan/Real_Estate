@@ -9,6 +9,7 @@ import 'package:real_estate/Utils/utils.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_services.dart';
 import 'package:real_estate/constants/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "LoginScreen";
@@ -44,8 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
       final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
       final User? user = userCredential.user;
 
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      sp.setString('id', user!.uid);
+      sp.setString('username', user.displayName.toString());
+
       Navigator.pushNamed(context, RoutesName.mainScreen,arguments:{
-        'username' : googleSignIn.currentUser!.displayName.toString()+"!\n",
+        'id' : user.uid,
+        'username' : user.displayName.toString()+"!\n",
       });
       // Use the user object for further operations or navigate to a new screen.
     }
@@ -69,22 +75,21 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     _auth.signInWithEmailAndPassword(
         email: emailController.text,
-        password: passwordController.text.toString()).then((value){
+        password: passwordController.text.toString()).then((value) async {
       setState(() {
         loading = false;
       });
+      Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {
+        'username':emailController.text.split('@')[0].toString() + "\n",
+      });
       Utils().toastMessage(value.user!.email.toString());
-      // if(()){Navigator.pushNamed(context, RoutesName.mainScreen);}
     }).onError((error, stackTrace){
       setState(() {
         loading = false;
       });
       Utils().toastMessage(error.toString());
-
     });
-      Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {
-        'username':emailController.text.split('@')[0].toString() + "\n",
-      });
+
   }
 
   @override
@@ -162,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   await _auth.signInAnonymously(); // Add 'await' to ensure the sign-in is completed before moving forward
                                   bool? isLogin = _auth.currentUser?.isAnonymous;
                                   if (isLogin != null && isLogin){
-                                    Navigator.pushNamed(context, RoutesName.mainScreen);
+                                    // Navigator.pushNamed(context, RoutesName.mainScreen);
                                     setState(() {
                                       loading=false;
                                     });

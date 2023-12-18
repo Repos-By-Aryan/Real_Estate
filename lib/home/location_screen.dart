@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/constants.dart';
+import '../routes/routes_name.dart';
 
 class LocationScreen extends StatefulWidget {
    const LocationScreen({super.key});
@@ -13,6 +14,7 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
    final locationController = TextEditingController();
    final _auth = FirebaseAuth.instance;
+   final _formKey = GlobalKey<FormState>();
 
    @override
    void dispose() {
@@ -104,25 +106,34 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
-                  child: TextFormField(
-                    controller: locationController,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      label: Text('City / State'),
-                      hintText: 'Enter city name',
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Color(0xffa7c8fc),
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      enabledBorder: OutlineInputBorder(
+                Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
+                    child: TextFormField(
+                      controller: locationController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        label: Text('City / State'),
+                        hintText: 'Enter city name',
+                        focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: Color(0xffE4E7EB),
+                            color: Color(0xffa7c8fc),
                           ),
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xffE4E7EB),
+                            ),
+                            borderRadius: BorderRadius.circular(12)),
+                      ),
+                      validator: (value) {
+                      if (value!.isEmpty) {
+                      return 'Enter city';
+                      }
+                      return null;
+                      },
                     ),
                   ),
                 ),
@@ -133,7 +144,13 @@ class _LocationScreenState extends State<LocationScreen> {
                     alignment:Alignment.bottomCenter,
                     child:InkWell(
                       onTap: (){
-
+                        if(_formKey.currentState!.validate()){
+                          Navigator.pushNamed(context, RoutesName.locationResult,arguments: {
+                            'name':'Based on your location',
+                            'city': locationController.text.toString(),
+                          });
+                          debugPrint(locationController.text.toString());
+                        }
                       },
                       child: Container(
                         width: screenWidth*0.65,

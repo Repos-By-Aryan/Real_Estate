@@ -77,16 +77,7 @@ class _ViewAllState extends State<ViewAll> {
                 stream: firestore,
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
-                  final houseFilter = snapshot.data!.docs
-                      .where((document) => document['category'] == 'House')
-                      .toList();
-                  final villaFilter = snapshot.data!.docs
-                      .where((document) => document['category'] == 'Villa')
-                      .toList();
-                  final apartmentFilter = snapshot.data!.docs
-                      .where(
-                          (document) => document['category'] == 'Apartment')
-                      .toList();
+
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -106,9 +97,7 @@ class _ViewAllState extends State<ViewAll> {
                         mainAxisExtent: 245,
                         // crossAxisCount: 2, // Set the number of columns here
                       ),
-                      itemCount: snapshot.data!.docs.length < 10
-                          ? snapshot.data!.docs.length
-                          : 10,
+                      itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         final document = snapshot.data!.docs[index];
                         return GestureDetector(

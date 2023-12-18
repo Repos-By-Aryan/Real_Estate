@@ -7,11 +7,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:parking_system/Utils/roundedbutton.dart';
-import 'package:parking_system/Utils/toast_message.dart';
-import 'package:parking_system/Welcome_&_introduction%20screens/splash_screen.dart';
-import 'package:parking_system/home_screen.dart';
+import 'package:real_estate/home/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Utils/utils.dart';
+import '../constants/constants.dart';
 
 class CompleteUserProfileScreen extends StatefulWidget {
   const CompleteUserProfileScreen({super.key});
@@ -50,7 +50,6 @@ class _CompleteUserProfileScreenState extends State<CompleteUserProfileScreen> {
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
-
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
@@ -73,7 +72,7 @@ class _CompleteUserProfileScreenState extends State<CompleteUserProfileScreen> {
                         "Complete Your Profile",
                         style: TextStyle(
                             fontSize: 30,
-                            fontFamily: "Myfont1",
+                            fontFamily: "Lato",
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                       ),
@@ -261,7 +260,7 @@ class _CompleteUserProfileScreenState extends State<CompleteUserProfileScreen> {
                           child: SizedBox(
                             height: screenHeight * 0.062,
                             width: screenWidth * 0.94,
-                            child: DropdownButtonFormField2(
+                            child: DropdownButtonFormField(
                               items: genderItems
                                   .map((value) => DropdownMenuItem(
                                       value: value,
@@ -290,16 +289,16 @@ class _CompleteUserProfileScreenState extends State<CompleteUserProfileScreen> {
                               ),
                               style: TextStyle(
                                   fontSize: 17,
-                                  fontFamily: "Myfont1",
+                                  fontFamily: "Lato",
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black),
-                              dropdownStyleData: DropdownStyleData(
-                                  direction: DropdownDirection.left,
-                                  width: screenWidth * 0.45,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15))),
-                              buttonStyleData: ButtonStyleData(
-                                  padding: EdgeInsets.only(right: 8.0)),
+                              // dropdownStyleData: DropdownStyleData(
+                              //     direction: DropdownDirection.left,
+                              //     width: screenWidth * 0.45,
+                              //     decoration: BoxDecoration(
+                              //         borderRadius: BorderRadius.circular(15))),
+                              // buttonStyleData: ButtonStyleData(
+                              //     padding: EdgeInsets.only(right: 8.0)),
                               decoration: InputDecoration(
                                 contentPadding:
                                     EdgeInsets.symmetric(horizontal: 15),
@@ -344,14 +343,7 @@ class _CompleteUserProfileScreenState extends State<CompleteUserProfileScreen> {
                       child: SizedBox(
                         height: screenHeight * 0.068,
                         width: screenWidth * 0.95,
-                        child: RoundedButton(
-                            btnname: "Complete Profile",
-                            loading: loading,
-                            onpressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                uploadImage();
-                              }
-                            }),
+                        child:Text("Hello"),
                       ),
                     )
                   ],
@@ -363,6 +355,14 @@ class _CompleteUserProfileScreenState extends State<CompleteUserProfileScreen> {
       ),
     );
   }
+  // Button(
+  // btnname: "Complete Profile",
+  // loading: loading,
+  // onpressed: () {
+  // if (_formKey.currentState!.validate()) {
+  // uploadImage();
+  // }
+  // }),
 
   Future getGalleryImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -406,7 +406,7 @@ class _CompleteUserProfileScreenState extends State<CompleteUserProfileScreen> {
       });
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => MainScreen(),
           ),
           (route) => false);
     }).onError((error, stackTrace) {

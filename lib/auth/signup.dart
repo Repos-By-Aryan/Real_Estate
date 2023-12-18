@@ -46,6 +46,8 @@ class _SignUpState extends State<SignUp> {
         setState(() {
           loading = false;
         });
+        Utils().toastMessage('Account created successfully');
+        Navigator.pushReplacementNamed(context, RoutesName.login);
         // Navigator.pushReplacementNamed(context, Login.id);
       }).onError((error, stackTrace){
         Utils().toastMessage(error.toString());
@@ -53,7 +55,7 @@ class _SignUpState extends State<SignUp> {
           loading = false;
         });
       });
-      Navigator.pushReplacementNamed(context, RoutesName.login);
+
     }
   }
 
