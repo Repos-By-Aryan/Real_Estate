@@ -25,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool loading = false;
   Color visibilityColor = const Color(0xFF62a6f7);
   bool visibility = true;
-  int count = 0;
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -89,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
       });
       Utils().toastMessage(error.toString());
     });
-
   }
 
   @override
@@ -244,14 +242,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         suffixIcon: TextButton(
                                             onPressed: () {
                                               setState(() {
-                                                if (count % 2 == 0) {
-                                                  visibility = false;
+                                                visibility = !visibility;
+                                                if(visibility){
                                                   visibilityColor = const Color(0xff4C5980);
-                                                  count++;
-                                                } else {
-                                                  visibility = true;
+                                                }
+                                                else{
                                                   visibilityColor = const Color(0xFF62a6f7);
-                                                  count++;
                                                 }
                                               });
                                             },

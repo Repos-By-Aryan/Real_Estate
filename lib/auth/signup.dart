@@ -20,7 +20,6 @@ class _SignUpState extends State<SignUp> {
   bool visibility = true;
   int count = 0;
   final _formKey = GlobalKey<FormState>();
-  // final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -29,7 +28,6 @@ class _SignUpState extends State<SignUp> {
   @override
   void dispose() {
     super.dispose();
-    // nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
   }
@@ -48,7 +46,6 @@ class _SignUpState extends State<SignUp> {
         });
         Utils().toastMessage('Account created successfully');
         Navigator.pushReplacementNamed(context, RoutesName.login);
-        // Navigator.pushReplacementNamed(context, Login.id);
       }).onError((error, stackTrace){
         Utils().toastMessage(error.toString());
         setState(() {

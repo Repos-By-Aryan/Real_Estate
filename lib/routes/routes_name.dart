@@ -15,5 +15,6 @@ class RoutesName{
   static const locationScreen = 'location';
   static const allproperty = 'view_all';
   static const locationResult = 'locationresult';
+  static const onboarding = 'onboarding';
 
 }

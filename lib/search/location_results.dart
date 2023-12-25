@@ -86,6 +86,9 @@ class _LocationResultScreenState extends State<LocationResultScreen> {
                       if (snapshot.hasError) {
                         return const Center(child: Text("An error occurred."));
                       }
+                      if(locationFilter.isEmpty){
+                        return const Center(child: Text('No results found'),);
+                      }
                       return SizedBox(
                         height: screenHeight * 0.3,
                         width: screenWidth,

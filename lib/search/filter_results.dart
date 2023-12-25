@@ -42,7 +42,7 @@ class _FilterResultScreenState extends State<FilterResultScreen> {
         children: [
           Stack(
             children: [
-              Image.asset('assets/images/one.webp',fit: BoxFit.fitWidth,),
+              Image.asset('assets/images/two.jpg',fit: BoxFit.fitWidth,),
               Positioned(
                 top:40,
                 child: ElevatedButton(

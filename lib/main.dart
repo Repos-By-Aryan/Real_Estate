@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffedf4ff)),
         useMaterial3: true,
       ),
-      initialRoute: RoutesName.splashScreen,
+      initialRoute: RoutesName.onboarding,
       onGenerateRoute: Routes.generateRoute,
     );
   }
