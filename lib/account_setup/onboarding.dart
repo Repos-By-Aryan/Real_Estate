@@ -1,5 +1,8 @@
+//Incomplete backend
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -140,6 +143,18 @@ class _OnboardingState extends State<Onboarding> {
                             ),
                             borderRadius:BorderRadius.circular(10),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(
+                              color: Colors.red,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(
+                              color: Colors.red,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide:  BorderSide(
                               color: Color(0xffE4E7EB),
@@ -170,6 +185,18 @@ class _OnboardingState extends State<Onboarding> {
                             ),
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(
+                              color: Colors.red,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(
+                              color: Colors.red,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderSide:  BorderSide(
                               color: Color(0xffE4E7EB),
@@ -181,7 +208,15 @@ class _OnboardingState extends State<Onboarding> {
                           if (value!.isEmpty) {
                             return 'Please enter your mobile number';
                           }
-                          return null;
+                          if(value.length < 10){
+                            return 'Invalid mobile number';
+                          }
+                          if(value.length > 10){
+                            return 'Invalid mobile number';
+                          }
+                          if(value.length == 10){
+                            return null;
+                          }
                         },
                       ),
                       SizedBox(height: 10,),
@@ -210,7 +245,6 @@ class _OnboardingState extends State<Onboarding> {
                           return null;
                         },
                       ),
-
                     ],
                   ),
                 ),
@@ -219,6 +253,36 @@ class _OnboardingState extends State<Onboarding> {
                 alignment:Alignment.bottomCenter,
                 child:InkWell(
                   onTap: (){
+                    if(_formKey.currentState!.validate()){
+
+                    }
+                    showModalBottomSheet(
+                        showDragHandle: true,
+                        context: context,
+                        builder: (BuildContext context){
+                      return SizedBox(
+                        height: screenWidth*0.5,
+                        child: Column(
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: screenHeight*0.10,
+                                  width: screenWidth*0.20,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: RadialGradient(colors: [Color(0xff8bc83f),Color(0xff234f68), Color(0xff8bc83f)]),
+                                  ),
+                                  child: Icon(Icons.check,color: Colors.white,),
+                                ),
+                              ],
+                            ),
+                            Center(child: TextButton(child:Text("Close"),onPressed: (){
+                            Navigator.pop(context);
+                          },),),],
+                        ),
+                      );
+                    });
 
                   },
                   child: Container(
