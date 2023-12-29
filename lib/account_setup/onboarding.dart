@@ -264,19 +264,30 @@ class _OnboardingState extends State<Onboarding> {
                         height: screenWidth*0.5,
                         child: Column(
                           children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  height: screenHeight*0.10,
-                                  width: screenWidth*0.20,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: RadialGradient(colors: [Color(0xff8bc83f),Color(0xff234f68), Color(0xff8bc83f)]),
-                                  ),
-                                  child: Icon(Icons.check,color: Colors.white,),
+                            Container(
+                              width:100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
+                                  colors: [
+                                    Color(0xff234f688),
+                                    Color(0xff8bc83f),
+                                    Color(0xdf234f68),
+                                    Color(0xaf234f68),
+                                    // Replace with the color at the edges of your gradient
+                                  ],
+                                  stops: [0.4,0.8,0.9, 1.0],
+                                  // Adjust these values to change the size and transition of the gradient
                                 ),
-                              ],
+                              ),
+                              child: Icon(
+                                Icons.check, // Replace with the icon you want to display
+                                color: Colors.white,
+                                size: 50.0, // Adjust the size of the icon as needed
+                              ),
                             ),
+
                             Center(child: TextButton(child:Text("Close"),onPressed: (){
                             Navigator.pop(context);
                           },),),],
