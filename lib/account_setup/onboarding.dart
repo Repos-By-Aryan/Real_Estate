@@ -1,9 +1,13 @@
 //Incomplete backend
 
+import 'dart:ffi';
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:real_estate/routes/routes_name.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../constants/constants.dart';
@@ -254,47 +258,76 @@ class _OnboardingState extends State<Onboarding> {
                 child:InkWell(
                   onTap: (){
                     if(_formKey.currentState!.validate()){
-
+                      showModalBottomSheet(
+                          showDragHandle: true,
+                          constraints: BoxConstraints.expand(),
+                          context: context,
+                          builder: (BuildContext context){
+                            return Container(
+                              constraints: BoxConstraints.expand(),
+                              height: screenWidth*0.5,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width:150,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      ),
+                                    child: SvgPicture.asset('assets/svg/Alert-Success.svg'),
+                                  ),
+                                  SizedBox(height:10),
+                                  RichText(
+                                    maxLines: 3,
+                                    text: TextSpan(
+                                        text: "Account ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 30,
+                                            fontFamily: 'Lato',
+                                            color: Colors.black),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: "successfully\n",
+                                            style: TextStyle(
+                                              color: Color(0xff234F68),
+                                              fontWeight: FontWeight.w900,
+                                              fontFamily: 'Lato',
+                                            ),
+                                          ),
+                                          TextSpan(
+                                              text: "created",
+                                              style:
+                                              TextStyle(fontSize: 30, color: Colors.black)),
+                                        ]),
+                                  ),
+                                  SizedBox(height:20),
+                                  Text('Welcome to the iConicFeed family, glad to have you onboard.',maxLines:2,style: ratingStyle,),
+                                  SizedBox(height:30),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: InkWell(
+                                      onTap: (){
+                                        Navigator.pop(context);
+                                      },
+                                      child: Container(
+                                        width: screenWidth*0.65,
+                                        height:50,
+                                        decoration: BoxDecoration(
+                                          color: greenTheme,
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: Center(
+                                          child:Text("Finish",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          });
                     }
-                    showModalBottomSheet(
-                        showDragHandle: true,
-                        context: context,
-                        builder: (BuildContext context){
-                      return SizedBox(
-                        height: screenWidth*0.5,
-                        child: Column(
-                          children: [
-                            Container(
-                              width:100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                gradient: RadialGradient(
-                                  colors: [
-                                    Color(0xff234f688),
-                                    Color(0xff8bc83f),
-                                    Color(0xdf234f68),
-                                    Color(0xaf234f68),
-                                    // Replace with the color at the edges of your gradient
-                                  ],
-                                  stops: [0.4,0.8,0.9, 1.0],
-                                  // Adjust these values to change the size and transition of the gradient
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.check, // Replace with the icon you want to display
-                                color: Colors.white,
-                                size: 50.0, // Adjust the size of the icon as needed
-                              ),
-                            ),
-
-                            Center(child: TextButton(child:Text("Close"),onPressed: (){
-                            Navigator.pop(context);
-                          },),),],
-                        ),
-                      );
-                    });
-
                   },
                   child: Container(
                     width: screenWidth*0.65,

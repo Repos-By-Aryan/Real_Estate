@@ -16,5 +16,5 @@ class RoutesName{
   static const allproperty = 'view_all';
   static const locationResult = 'locationresult';
   static const onboarding = 'onboarding';
-
+  static const favourite = 'favourite';
 }

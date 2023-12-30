@@ -111,6 +111,8 @@ flutter:
     - assets/images/viewAll.png
     - assets/images/blankpp.webp
     - assets/svg/greenCircle.svg
+    - assets/svg/Alert-Success.svg
+    - assets/svg/Add-Success.svg
 #    - lib/main.dart
 
   # An image asset can refer to one or more resolution-specific "variants", see

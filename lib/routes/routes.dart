@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/auth/forgotpassword.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/account_setup/onboarding.dart';
+import 'package:real_estate/home/favourite.dart';
 import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/home/location_screen.dart';
 import 'package:real_estate/home/main_screen.dart';
@@ -63,6 +64,10 @@ class Routes {
           return MaterialPageRoute(
             builder: (context) =>
                 Onboarding());
+          case RoutesName.favourite:
+          return MaterialPageRoute(
+            builder: (context) =>
+                Favourites());
 
       default:
         return MaterialPageRoute(builder: (context) {
