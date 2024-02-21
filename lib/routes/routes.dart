@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_estate/account_setup/profile_screen.dart';
 import 'package:real_estate/auth/forgotpassword.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/account_setup/onboarding.dart';
@@ -68,6 +69,10 @@ class Routes {
           return MaterialPageRoute(
             builder: (context) =>
                 Favourites());
+          case RoutesName.profile:
+          return MaterialPageRoute(
+            builder: (context) =>
+                ProfileScreen());
 
       default:
         return MaterialPageRoute(builder: (context) {

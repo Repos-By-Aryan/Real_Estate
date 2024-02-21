@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:real_estate/account_setup/profile_screen.dart';
 import 'package:real_estate/auth/login.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/home/favourite.dart';
@@ -23,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
       HomeScreen(data: widget.data),
       Search(),
       Favourites(),
-      Center(child: Text("Your Account Info")),
+      ProfileScreen(),
     ];
     return Scaffold(
       body:screens[currentIndex],

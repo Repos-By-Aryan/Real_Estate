@@ -67,6 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '764733105402',
     projectId: 'iconicfeed-9cb86',
     storageBucket: 'iconicfeed-9cb86.appspot.com',
+    androidClientId: '764733105402-u7np02sf8bideojd8fug7nhk46t310l0.apps.googleusercontent.com',
+    iosClientId: '764733105402-9thmq08cgtji65qrvcsd9b27r12l4jdn.apps.googleusercontent.com',
     iosBundleId: 'com.example.real.realEstate',
   );
 
@@ -76,6 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '764733105402',
     projectId: 'iconicfeed-9cb86',
     storageBucket: 'iconicfeed-9cb86.appspot.com',
+    androidClientId: '764733105402-u7np02sf8bideojd8fug7nhk46t310l0.apps.googleusercontent.com',
+    iosClientId: '764733105402-02qkc9fi1o4bjatpghqt61dijksaotui.apps.googleusercontent.com',
     iosBundleId: 'com.example.real.realEstate.RunnerTests',
   );
 }

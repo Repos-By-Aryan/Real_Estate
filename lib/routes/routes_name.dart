@@ -17,4 +17,5 @@ class RoutesName{
   static const locationResult = 'locationresult';
   static const onboarding = 'onboarding';
   static const favourite = 'favourite';
+  static const profile = 'profile';
 }
