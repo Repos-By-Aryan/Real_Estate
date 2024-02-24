@@ -31,32 +31,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar:AppBar(
         forceMaterialTransparency: true,
         leadingWidth: 70,
-        leading: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xcbffffff),
-            elevation: 0.2,
-            shape: const CircleBorder(),
-            padding: const EdgeInsets.all(12),
-          ),
-          child: const Icon(
-            Icons.chevron_left,
-            size: 23,
-            color: Colors.black87,
-          ),
+        title: RichText(
+          maxLines: 3,
+          text: TextSpan(
+              text: "Your ",
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                  fontFamily: ''
+                      'Lato',
+                  color: Colors.black),
+              children: <TextSpan>[
+                TextSpan(
+                  text: "Account",
+                  style: TextStyle(
+                    color: Color(0xff234F68),
+                    fontWeight: FontWeight.w900,
+                    fontFamily: 'Lato',
+                  ),
+                ),
+              ]),
         ),
-        automaticallyImplyLeading: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: GestureDetector(
-                onTap: () {
-                },
-                child: const RoundedButton(title: "skip")),
-          ),
-        ],
+        centerTitle: true,
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(10.0),
@@ -65,31 +61,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height:10),
-              RichText(
-                maxLines: 3,
-                text: TextSpan(
-                    text: "Fill your ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 30,
-                        fontFamily: 'Lato',
-                        color: Colors.black),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "information\n",
-                        style: TextStyle(
-                          color: Color(0xff234F68),
-                          fontWeight: FontWeight.w900,
-                          fontFamily: 'Lato',
-                        ),
-                      ),
-                      TextSpan(
-                          text: "below",
-                          style:
-                          TextStyle(fontSize: 30, color: Colors.black)),
-                    ]),
-              ),
               SizedBox(height:10),
               Center(
                 child: Stack(
