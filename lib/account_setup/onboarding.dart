@@ -7,11 +7,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../constants/constants.dart';
 import '../home/property_detail.dart';
+
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -31,6 +33,34 @@ class _OnboardingState extends State<Onboarding> {
   final emailController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  var selectedImage;
+
+
+  Future<void> pickImageWithSelection() async {
+    final ImagePicker picker = ImagePicker();
+    final image = await picker.pickImage(
+      source: (await showDialog<ImageSource>(
+        context: context, // The context of your current widget
+        builder: (BuildContext dialogContext) => AlertDialog( // Receive the dialog's context
+          title: Text('Select Image Source'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, ImageSource.camera), // Use dialogContext
+              child: Text('Camera'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, ImageSource.gallery),
+              child: Text('Gallery'),
+            ),
+          ],
+        ),
+      ))!,
+    imageQuality: 80,
+    );
+    setState(() {
+      selectedImage = XFile(image!.path).toString();
+    });
+  }
 
   @override
   void dispose() {
@@ -86,7 +116,7 @@ class _OnboardingState extends State<Onboarding> {
               RichText(
                 maxLines: 3,
                 text: TextSpan(
-                    text: "Fill your ",
+                    text: "Just a ",
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 30,
@@ -94,7 +124,7 @@ class _OnboardingState extends State<Onboarding> {
                         color: Colors.black),
                     children: <TextSpan>[
                       TextSpan(
-                        text: "information\n",
+                        text: "little bit ",
                         style: TextStyle(
                           color: Color(0xff234F68),
                           fontWeight: FontWeight.w900,
@@ -102,26 +132,35 @@ class _OnboardingState extends State<Onboarding> {
                         ),
                       ),
                       TextSpan(
-                          text: "below",
+                          text: "about you...",
                           style:
                           TextStyle(fontSize: 30, color: Colors.black)),
                     ]),
               ),
-              SizedBox(height:10),
+              SizedBox(height:20),
               Center(
                 child: Stack(
                   children: [
                     CircleAvatar(
                     radius: 60,
-                    backgroundImage: AssetImage('assets/images/blankpp.webp'),
+                    backgroundImage:selectedImage!=null?AssetImage(selectedImage):AssetImage('assets/images/blankpp.webp'),
+
                   ),
                   Positioned(
                     bottom: 2,
                     right: 2,
-                    child: CircleAvatar(
-                      child: Icon(Icons.mode_edit_outlined,color: Colors.white,size: 17,),
-                      radius:15,
-                    backgroundColor: theme,
+                    child: InkWell(
+                      onTap: (){
+                        pickImageWithSelection();
+                        setState(() {
+
+                        });
+                      },
+                      child: CircleAvatar(
+                        child: Icon(Icons.mode_edit_outlined,color: Colors.white,size: 17,),
+                        radius:15,
+                      backgroundColor: theme,
+                      ),
                     ),
                   )
                   ],

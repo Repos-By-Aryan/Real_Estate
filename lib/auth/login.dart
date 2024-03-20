@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
+
   GoogleSignIn googleSignIn = GoogleSignIn();
 
   Future<void> signInWithGoogle() async {
@@ -69,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() {
+    final user = _auth.currentUser;
     setState(() {
       loading =true;
     });
@@ -79,7 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = false;
       });
       Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {
-        'username':emailController.text.split('@')[0].toString() + "\n",
+        'id' : user?.uid,
+        'username' : "${user?.displayName.toString()}!\n",
       });
       Utils().toastMessage(value.user!.email.toString());
     }).onError((error, stackTrace){

@@ -15,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late VideoPlayerController _controller;
+  SplashServices _splashServices = SplashServices();
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ..setVolume(0.0);
 
     _playVideo();
+
   }
 
   @override
@@ -37,12 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _playVideo()async{
     _controller.play();
     await Future.delayed(const Duration(seconds: 4));
-    // if(splashService.isLogin(context)){
-    //   Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {
-    //     'username':""
-    //   });
-    // }
-    Navigator.pushReplacementNamed(context, RoutesName.one);
+    _splashServices.isLogin(context);
   }
 
   @override
