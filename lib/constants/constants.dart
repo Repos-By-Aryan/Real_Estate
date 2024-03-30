@@ -13,7 +13,7 @@ var boldText = const TextStyle(fontFamily:'Lato',color:theme,fontSize: 18,fontWe
 var featuredTitle = const TextStyle(fontFamily: 'Lato',color: Color(0xFF252B5C),fontSize: 20,fontWeight: FontWeight.w700);
 var ratingStyle = const TextStyle(
   fontSize: 12,  fontWeight: FontWeight.w700, color: Color(0xff53587A),fontFamily: 'Lato',);
-
+var greyText = const TextStyle(fontSize: 12, color: Colors.blueGrey);
 
 class SignInButton extends StatelessWidget {
   final String title;

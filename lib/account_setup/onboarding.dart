@@ -1,6 +1,7 @@
 //Incomplete backend
 
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -58,8 +59,9 @@ class _OnboardingState extends State<Onboarding> {
     imageQuality: 80,
     );
     setState(() {
-      selectedImage = XFile(image!.path).toString();
+      selectedImage = File(image!.path.toString());
     });
+
   }
 
   @override
@@ -100,6 +102,9 @@ class _OnboardingState extends State<Onboarding> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: GestureDetector(
               onTap: () {
+                Navigator.pushReplacementNamed(context, RoutesName.homeScreen,arguments: {
+                  'name': nameController.text.toString(),
+                });
               },
               child: const RoundedButton(title: "skip")),
         ),
@@ -137,24 +142,27 @@ class _OnboardingState extends State<Onboarding> {
                           TextStyle(fontSize: 30, color: Colors.black)),
                     ]),
               ),
+              SizedBox(height:10),
+              Text('You can edit this later in settings', style: greyText,),
               SizedBox(height:20),
               Center(
                 child: Stack(
                   children: [
-                    CircleAvatar(
-                    radius: 60,
-                    backgroundImage:selectedImage!=null?AssetImage(selectedImage):AssetImage('assets/images/blankpp.webp'),
-
-                  ),
+                    GestureDetector(
+                      onTap:(){
+                        InteractiveViewer(child: Image(image: selectedImage,) );
+              },
+                      child: CircleAvatar(
+                      radius: 60,
+                        backgroundImage: selectedImage != null ? FileImage(selectedImage) as ImageProvider<Object>?: AssetImage('assets/images/blankpp.webp'),
+              ),
+                    ),
                   Positioned(
                     bottom: 2,
                     right: 2,
                     child: InkWell(
                       onTap: (){
                         pickImageWithSelection();
-                        setState(() {
-
-                        });
                       },
                       child: CircleAvatar(
                         child: Icon(Icons.mode_edit_outlined,color: Colors.white,size: 17,),
