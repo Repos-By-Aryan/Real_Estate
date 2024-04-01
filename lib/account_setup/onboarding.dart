@@ -4,7 +4,10 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,7 +38,8 @@ class _OnboardingState extends State<Onboarding> {
 
   final _formKey = GlobalKey<FormState>();
   var selectedImage;
-
+  final storageRef = FirebaseStorage.instance.ref().child('profile_pics');
+  // final profile_pic = storageRef.child('profile_pics');
 
   Future<void> pickImageWithSelection() async {
     final ImagePicker picker = ImagePicker();
@@ -58,8 +62,13 @@ class _OnboardingState extends State<Onboarding> {
       ))!,
     imageQuality: 80,
     );
-    setState(() {
+    setState(() async {
       selectedImage = File(image!.path.toString());
+      try {
+        await storageRef.putFile(selectedImage);
+      }  catch (e) {
+        debugPrint(e.toString());// ...
+      }
     });
 
   }
