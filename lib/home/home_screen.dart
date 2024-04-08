@@ -13,11 +13,28 @@ import '../Utils/utils.dart';
 class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
 
-  dynamic data;
-  HomeScreen({super.key, this.data});
+  // dynamic data;
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+}
+
+Future<String?> getUserNameFromFirestore(String documentId) async {
+  try {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(documentId)
+        .get();
+
+    if (documentSnapshot.exists) {
+      return documentSnapshot.get('name');
+    } else {
+      return 'User not found';
+    }
+  } catch (error) {
+    return 'Error: $error';
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -74,6 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final firestore =
         FirebaseFirestore.instance.collection('listings').snapshots();
     final _auth = FirebaseAuth.instance;
+    final userDBref = FirebaseFirestore.instance.collection('Users');
+    final userId = _auth.currentUser!.uid.toString();
+
 
     _determinePosition();
 
@@ -373,7 +393,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: widget.data['username'],
+                          text: getUserNameFromFirestore(userId).toString(),
                           style: TextStyle(
                             color: Color(0xff234F68),
                             fontWeight: FontWeight.w900,

@@ -1,5 +1,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _auth.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text.toString()).then((value) async {
-      setState(() {
+      setState(() async{
         loading = false;
       });
       Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {

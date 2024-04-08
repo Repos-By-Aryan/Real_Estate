@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final screens = [
-      HomeScreen(data: widget.data),
+      HomeScreen(),
       Search(),
       Favourites(),
       ProfileScreen(),

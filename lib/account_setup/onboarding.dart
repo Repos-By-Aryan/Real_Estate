@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:real_estate/Utils/utils.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -28,7 +29,10 @@ class Onboarding extends StatefulWidget {
 }
 
 class _OnboardingState extends State<Onboarding> {
+  bool loading = false;
   final _auth = FirebaseAuth.instance;
+  final userDBref = FirebaseFirestore.instance.collection('Users');
+
 
   final nameController = TextEditingController();
 
@@ -38,8 +42,8 @@ class _OnboardingState extends State<Onboarding> {
 
   final _formKey = GlobalKey<FormState>();
   var selectedImage;
-  final storageRef = FirebaseStorage.instance.ref().child('profile_pics');
-  // final profile_pic = storageRef.child('profile_pics');
+  var imageUrl;
+
 
   Future<void> pickImageWithSelection() async {
     final ImagePicker picker = ImagePicker();
@@ -62,13 +66,8 @@ class _OnboardingState extends State<Onboarding> {
       ))!,
     imageQuality: 80,
     );
-    setState(() async {
+    setState((){
       selectedImage = File(image!.path.toString());
-      try {
-        await storageRef.putFile(selectedImage);
-      }  catch (e) {
-        debugPrint(e.toString());// ...
-      }
     });
 
   }
@@ -83,8 +82,11 @@ class _OnboardingState extends State<Onboarding> {
 
   @override
   Widget build(BuildContext context) {
+    emailController.text = _auth.currentUser!.email.toString();
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+
+
     return Scaffold(
       appBar:AppBar(
         forceMaterialTransparency: true,
@@ -111,9 +113,7 @@ class _OnboardingState extends State<Onboarding> {
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: GestureDetector(
               onTap: () {
-                Navigator.pushReplacementNamed(context, RoutesName.homeScreen,arguments: {
-                  'name': nameController.text.toString(),
-                });
+                Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
               },
               child: const RoundedButton(title: "skip")),
         ),
@@ -312,8 +312,37 @@ class _OnboardingState extends State<Onboarding> {
               Align(
                 alignment:Alignment.bottomCenter,
                 child:InkWell(
-                  onTap: (){
+                  onTap: () async{
+                    setState(() {
+                      loading=true;
+                    });
                     if(_formKey.currentState!.validate()){
+                        Reference storageRef = FirebaseStorage.instance.ref();
+                        Reference profile_pic = storageRef.child(
+                            'profile_pics');
+                        String uniqueFileName = _auth.currentUser!.uid.toString();
+                        Reference referenceImageToUpload = profile_pic.child(
+                            uniqueFileName);
+                        try{
+                          await referenceImageToUpload.putFile(selectedImage);
+                          imageUrl = await referenceImageToUpload.getDownloadURL();
+                          await userDBref.doc(uniqueFileName).set({
+                            'name':nameController.text.toString(),
+                            'mobile' : mobileController.text.toString(),
+                          'email':_auth.currentUser!.email.toString(),
+                            'image' : imageUrl.toString(),
+                            'id':uniqueFileName.toString()
+                          });
+
+                        }catch(e){
+                          setState(() {
+                            loading=false;
+                          });
+                          Utils().toastMessage(e.toString());
+                        }
+                        setState(() {
+                          loading = false;
+                        });
                       showModalBottomSheet(
                           showDragHandle: true,
                           constraints: BoxConstraints.expand(),
@@ -363,8 +392,11 @@ class _OnboardingState extends State<Onboarding> {
                                   Align(
                                     alignment: Alignment.bottomCenter,
                                     child: InkWell(
-                                      onTap: (){
+                                      onTap: () {
                                         Navigator.pop(context);
+                                        Navigator.pushReplacementNamed(context, RoutesName.mainScreen, arguments: {
+                                          'name':nameController.text.toString(),
+                                        });
                                       },
                                       child: Container(
                                         width: screenWidth*0.65,
@@ -383,7 +415,9 @@ class _OnboardingState extends State<Onboarding> {
                               ),
                             );
                           });
+
                     }
+
                   },
                   child: Container(
                     width: screenWidth*0.65,
@@ -393,7 +427,7 @@ class _OnboardingState extends State<Onboarding> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
-                      child:Text("Continue",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
+                      child:loading?CircularProgressIndicator(color: Colors.white,):Text("Continue",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
                     ),
                   ),),
               )
