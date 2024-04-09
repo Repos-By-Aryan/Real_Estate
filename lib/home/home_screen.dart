@@ -20,24 +20,16 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-Future<String?> getUserNameFromFirestore(String documentId) async {
-  try {
-    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(documentId)
-        .get();
-
-    if (documentSnapshot.exists) {
-      return documentSnapshot.get('name');
-    } else {
-      return 'User not found';
-    }
-  } catch (error) {
-    return 'Error: $error';
-  }
-}
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserNameFromFirestore('Xjtj990VZdbcj4cHPes80fr85kI3');
+
+  }
   String formatValue(var value) {
     if (value >= 10000000) {
       double valueInCr = value / 10000000.0;
@@ -83,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   int selectedCard = 0;
   final filters = ['All', 'House', 'Apartment', 'Villa'];
+  String? userName;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final _auth = FirebaseAuth.instance;
     final userDBref = FirebaseFirestore.instance.collection('Users');
     final userId = _auth.currentUser!.uid.toString();
-
 
     _determinePosition();
 
@@ -393,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: getUserNameFromFirestore(userId).toString(),
+                          text: userName,
                           style: TextStyle(
                             color: Color(0xff234F68),
                             fontWeight: FontWeight.w900,
@@ -401,7 +393,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         TextSpan(
-                            text: "Let's start exploring ",
+                            text: "\nLet's start exploring ",
                             style:
                                 TextStyle(fontSize: 30, color: Colors.black)),
                       ]),
@@ -1500,5 +1492,23 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  void getUserNameFromFirestore(String documentId) async {
+
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(documentId)
+          .get();
+
+      if (documentSnapshot.exists) {
+        debugPrint(documentSnapshot.get('name').toString());
+        userName = documentSnapshot.get('name').toString();
+      } else {
+        userName = 'Guest!';
+      }
+    } catch (error) {
+      Utils().toastMessage('Error: $error') ;
+    }
   }
 }
