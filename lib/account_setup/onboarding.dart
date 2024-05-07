@@ -44,6 +44,109 @@ class _OnboardingState extends State<Onboarding> {
   var selectedImage;
   var imageUrl;
 
+  get screenWidth => MediaQuery.of(context).size.width;
+
+  Future<void> uploadData() async {
+    Reference storageRef = FirebaseStorage.instance.ref();
+    Reference profile_pic = storageRef.child(
+        'profile_pics');
+    String uniqueFileName = _auth.currentUser!.uid.toString();
+    Reference referenceImageToUpload = profile_pic.child(
+        uniqueFileName);
+    try{
+      await referenceImageToUpload.putFile(selectedImage);
+      imageUrl = await referenceImageToUpload.getDownloadURL();
+      await userDBref.doc(uniqueFileName).set({
+        'name':nameController.text.toString(),
+        'mobile' : mobileController.text.toString(),
+        'email':_auth.currentUser!.email.toString(),
+        'image' : imageUrl.toString(),
+        'id':uniqueFileName.toString()
+      });
+
+    }catch(e){
+      setState(() {
+        loading=false;
+      });
+      Utils().toastMessage(e.toString());
+    }
+    setState(() {
+      loading = false;
+    });
+    showModalBottomSheet(
+        showDragHandle: true,
+        constraints: BoxConstraints.expand(),
+        context: context,
+        builder: (BuildContext context){
+          return Container(
+            constraints: BoxConstraints.expand(),
+            height: screenWidth*0.5,
+            child: Column(
+              children: [
+                Container(
+                  width:150,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: SvgPicture.asset('assets/svg/Alert-Success.svg'),
+                ),
+                SizedBox(height:10),
+                RichText(
+                  maxLines: 3,
+                  text: TextSpan(
+                      text: "Account ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 30,
+                          fontFamily: 'Lato',
+                          color: Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "successfully\n",
+                          style: TextStyle(
+                            color: Color(0xff234F68),
+                            fontWeight: FontWeight.w900,
+                            fontFamily: 'Lato',
+                          ),
+                        ),
+                        TextSpan(
+                            text: "created",
+                            style:
+                            TextStyle(fontSize: 30, color: Colors.black)),
+                      ]),
+                ),
+                SizedBox(height:20),
+                Text('Welcome to the iConicFeed family, glad to have you onboard.',maxLines:2,style: ratingStyle,),
+                SizedBox(height:30),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, RoutesName.mainScreen, arguments: {
+                        'name':nameController.text.toString(),
+                      });
+                    },
+                    child: Container(
+                      width: screenWidth*0.65,
+                      height:50,
+                      decoration: BoxDecoration(
+                        color: greenTheme,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child:Text("Finish",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+
+  }
 
   Future<void> pickImageWithSelection() async {
     final ImagePicker picker = ImagePicker();
@@ -79,6 +182,7 @@ class _OnboardingState extends State<Onboarding> {
     nameController.dispose();
     mobileController.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -268,10 +372,7 @@ class _OnboardingState extends State<Onboarding> {
                           if (value!.isEmpty) {
                             return 'Please enter your mobile number';
                           }
-                          if(value.length < 10){
-                            return 'Invalid mobile number';
-                          }
-                          if(value.length > 10){
+                          if((value.length < 10) || (value.length>10)){
                             return 'Invalid mobile number';
                           }
                           if(value.length == 10){
@@ -316,108 +417,9 @@ class _OnboardingState extends State<Onboarding> {
                     setState(() {
                       loading=true;
                     });
-                    if(_formKey.currentState!.validate()){
-                        Reference storageRef = FirebaseStorage.instance.ref();
-                        Reference profile_pic = storageRef.child(
-                            'profile_pics');
-                        String uniqueFileName = _auth.currentUser!.uid.toString();
-                        Reference referenceImageToUpload = profile_pic.child(
-                            uniqueFileName);
-                        try{
-                          await referenceImageToUpload.putFile(selectedImage);
-                          imageUrl = await referenceImageToUpload.getDownloadURL();
-                          await userDBref.doc(uniqueFileName).set({
-                            'name':nameController.text.toString(),
-                            'mobile' : mobileController.text.toString(),
-                          'email':_auth.currentUser!.email.toString(),
-                            'image' : imageUrl.toString(),
-                            'id':uniqueFileName.toString()
-                          });
-
-                        }catch(e){
-                          setState(() {
-                            loading=false;
-                          });
-                          Utils().toastMessage(e.toString());
-                        }
-                        setState(() {
-                          loading = false;
-                        });
-                      showModalBottomSheet(
-                          showDragHandle: true,
-                          constraints: BoxConstraints.expand(),
-                          context: context,
-                          builder: (BuildContext context){
-                            return Container(
-                              constraints: BoxConstraints.expand(),
-                              height: screenWidth*0.5,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width:150,
-                                    height: 150,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      ),
-                                    child: SvgPicture.asset('assets/svg/Alert-Success.svg'),
-                                  ),
-                                  SizedBox(height:10),
-                                  RichText(
-                                    maxLines: 3,
-                                    text: TextSpan(
-                                        text: "Account ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 30,
-                                            fontFamily: 'Lato',
-                                            color: Colors.black),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: "successfully\n",
-                                            style: TextStyle(
-                                              color: Color(0xff234F68),
-                                              fontWeight: FontWeight.w900,
-                                              fontFamily: 'Lato',
-                                            ),
-                                          ),
-                                          TextSpan(
-                                              text: "created",
-                                              style:
-                                              TextStyle(fontSize: 30, color: Colors.black)),
-                                        ]),
-                                  ),
-                                  SizedBox(height:20),
-                                  Text('Welcome to the iConicFeed family, glad to have you onboard.',maxLines:2,style: ratingStyle,),
-                                  SizedBox(height:30),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                        Navigator.pushReplacementNamed(context, RoutesName.mainScreen, arguments: {
-                                          'name':nameController.text.toString(),
-                                        });
-                                      },
-                                      child: Container(
-                                        width: screenWidth*0.65,
-                                        height:50,
-                                        decoration: BoxDecoration(
-                                          color: greenTheme,
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        child: Center(
-                                          child:Text("Finish",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          });
-
+                    if(_formKey.currentState!.validate()) {
+                      uploadData();
                     }
-
                   },
                   child: Container(
                     width: screenWidth*0.65,

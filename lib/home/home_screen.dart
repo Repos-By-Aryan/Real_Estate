@@ -9,6 +9,7 @@ import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/routes/routes_name.dart';
 
 import '../Utils/utils.dart';
+import '../get_data/all_data.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
@@ -27,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getUserNameFromFirestore('Xjtj990VZdbcj4cHPes80fr85kI3');
-
   }
+
+
   String formatValue(var value) {
     if (value >= 10000000) {
       double valueInCr = value / 10000000.0;
@@ -45,37 +46,36 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition();
-  }
+  // Future<Position> _determinePosition() async {
+  //   bool serviceEnabled;
+  //   LocationPermission permission;
+  //
+  //   // Test if location services are enabled.
+  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     return Future.error('Location services are disabled.');
+  //   }
+  //
+  //   permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       return Future.error('Location permissions are denied');
+  //     }
+  //   }
+  //
+  //   if (permission == LocationPermission.deniedForever) {
+  //     // Permissions are denied forever, handle appropriately.
+  //     return Future.error(
+  //         'Location permissions are permanently denied, we cannot request permissions.');
+  //   }
+  //
+  //   return await Geolocator.getCurrentPosition();
+  // }
 
   int currentIndex = 0;
   int selectedCard = 0;
   final filters = ['All', 'House', 'Apartment', 'Villa'];
-  String? userName;
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final firestore =
         FirebaseFirestore.instance.collection('listings').snapshots();
     final _auth = FirebaseAuth.instance;
-    final userDBref = FirebaseFirestore.instance.collection('Users');
-    final userId = _auth.currentUser!.uid.toString();
+     UserData userData = UserData();//Class object
+    ListingsData listingsDataObj = ListingsData();//Class object
+    final userName = userData.userData?['username'];
 
-    _determinePosition();
+
+    // _determinePosition();
 
     Widget buildPropertyCard(
       BuildContext context,
@@ -118,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Row(
             children: [
+              //LeftSide image and text of the property container
               Stack(
                 fit: StackFit.passthrough,
                 children: [
@@ -125,19 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CachedNetworkImage(
                       imageUrl: document['image_urls'][0].toString(),
-                      imageBuilder: (context, imageProvider) => isRent
-                          ? Container(
-                              width: (screenWidth * 0.8) * 0.49,
-                              height: 160,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                ),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            )
-                          : Container(
+                      imageBuilder: (context, imageProvider) => Container(
                               width: (screenWidth * 0.8) * 0.49,
                               height: 160,
                               decoration: BoxDecoration(
@@ -154,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Icon(Icons.error),
                     ),
                   ),
+                  //
                   Positioned(
                     bottom: 18,
                     left: 18,
@@ -180,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
+              //RightSideText and price etc. of the property container.
               SizedBox(
                 width: (screenWidth * 0.8) * 0.48,
                 child: Padding(
@@ -281,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
-          minimum: const EdgeInsets.all(10.0),
+          minimum: const EdgeInsets.all(7.0),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -385,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                          text: userName,
+                          text: "$userName!",
                           style: TextStyle(
                             color: Color(0xff234F68),
                             fontWeight: FontWeight.w900,
@@ -1493,22 +1486,22 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  void getUserNameFromFirestore(String documentId) async {
-
-    try {
-      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection('Users')
-          .doc(documentId)
-          .get();
-
-      if (documentSnapshot.exists) {
-        debugPrint(documentSnapshot.get('name').toString());
-        userName = documentSnapshot.get('name').toString();
-      } else {
-        userName = 'Guest!';
-      }
-    } catch (error) {
-      Utils().toastMessage('Error: $error') ;
-    }
-  }
+//   void getUserNameFromFirestore(String documentId) async {
+//
+//     try {
+//       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+//           .collection('Users')
+//           .doc(documentId)
+//           .get();
+//
+//       if (documentSnapshot.exists) {
+//         debugPrint(documentSnapshot.get('name').toString());
+//         userName = documentSnapshot.get('name').toString();
+//       } else {
+//         userName = 'Guest';
+//       }
+//     } catch (error) {
+//       Utils().toastMessage('Error: $error') ;
+//     }
+//   }
 }
