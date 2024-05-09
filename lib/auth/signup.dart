@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +45,7 @@ class _SignUpState extends State<SignUp> {
         setState(() {
           loading = false;
         });
-        Utils().toastMessage('Account created successfully');
+        Utils().toastMessage('Account created successfully. Please verify it to continue.');
         Navigator.pushReplacementNamed(context, RoutesName.login);
       }).onError((error, stackTrace){
         Utils().toastMessage(error.toString());

@@ -1,4 +1,5 @@
 //HomeScreen Code
+//UserData is not available on this screen
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +15,6 @@ import '../get_data/all_data.dart';
 class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
 
-  // dynamic data;
   const HomeScreen({super.key});
 
   @override
@@ -76,6 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   int selectedCard = 0;
   final filters = ['All', 'House', 'Apartment', 'Villa'];
+  ListingsData listingsDataObj = ListingsData();//Class object
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final firestore =
         FirebaseFirestore.instance.collection('listings').snapshots();
     final _auth = FirebaseAuth.instance;
-     UserData userData = UserData();//Class object
-    ListingsData listingsDataObj = ListingsData();//Class object
-    final userName = userData.userData?['username'];
+
+    final userName = UserData().userData?['name'];//
 
 
     // _determinePosition();

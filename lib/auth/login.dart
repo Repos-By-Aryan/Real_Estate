@@ -1,16 +1,20 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:real_estate/account_setup/profile_screen.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:real_estate/Utils/utils.dart';
 import 'package:real_estate/routes/routes_name.dart';
 import 'package:real_estate/splash_services/splash_services.dart';
 import 'package:real_estate/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../get_data/all_data.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "LoginScreen";
@@ -20,9 +24,9 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-
-
 class _LoginScreenState extends State<LoginScreen> {
+
+  //Variables
   bool loading = false;
   Color visibilityColor = const Color(0xFF62a6f7);
   bool visibility = true;
@@ -30,8 +34,20 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
-
+  final userDbref = FirebaseFirestore.instance.collection('Users');
   final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  //Functions and Futures
+
+  Future<bool> checkNewUser(id) async{
+   try{  DocumentSnapshot docSnapshot = await FirebaseFirestore.instance.collection('Users').doc(id).get();
+     // Check if the document exists
+     return docSnapshot.exists;
+   }catch(e) {
+     debugPrint('Error checking document existence: $e');
+     return false; // Return false in case of error
+   }
+  }
 
   Future<void> signInWithGoogle() async {
     try {
@@ -46,37 +62,41 @@ class _LoginScreenState extends State<LoginScreen> {
       final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
       final User? user = userCredential.user;
 
-      // SharedPreferences sp = await SharedPreferences.getInstance();
-      // sp.setString('id', user!.uid);
-      // sp.setString('username', user.displayName.toString());
-
-      Navigator.pushNamed(context, RoutesName.mainScreen,arguments:{
-        'id' : user!.uid,
-        'username' : "${user!.displayName}!\n",
-      });
+      debugPrint(user.toString());
+      if(await checkNewUser(user?.uid.toString())){
+        Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
+      }
+      else{
+        Navigator.pushNamed(context, RoutesName.onboarding);
       // Use the user object for further operations or navigate to a new screen.
+    }
+      await UserData().getUserData();//Getting the user data
+      Utils().toastMessage('Signed in successfully');
     }
     catch (e) {
       debugPrint(e.toString());
     }
   }
-  void login() {
+
+  void signInWithEmailAndPass() {
    late final User user;
     setState(() {
       loading =true;
     });
     _auth.signInWithEmailAndPassword(
         email: emailController.text,
-        password: passwordController.text.toString()).then((value) {
+        password: passwordController.text.toString()).then((value) async {
       setState(() {
         user = _auth.currentUser!;
         loading = false;
       });
-      Navigator.pushReplacementNamed(context, RoutesName.mainScreen,arguments: {
-        'id' : user.uid,
-        'username' : "${user.displayName.toString()}!\n",
-      });
-      debugPrint("${user.displayName.toString()}!\n");
+      if(await checkNewUser(user.uid.toString())){
+        Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
+      }
+      else {
+        Navigator.pushNamed(context, RoutesName.onboarding);
+      }
+      await UserData().getUserData();//Getting the user data
       Utils().toastMessage("Signed in successfully");
     }).onError((error, stackTrace){
       setState(() {
@@ -140,7 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           SizedBox(height: screenHeight * 0.02),
                           Text("Sign in to your account", style: heading),
-                          SizedBox(height: screenHeight * 0.01), // SizedBox()
+
+                          SizedBox(height: screenHeight * 0.01),
+                          // SizedBox()
                           InkWell(
                               onTap: () async{
                                 setState(() {
@@ -154,34 +176,28 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: SignInButton(
                                   title: "Sign in with Google",
                                   logo: "assets/images/GoogleIcon.png",
-                                  width: screenWidth * 0.65)),
-                          SizedBox(height: screenHeight * 0.01), // SizedBox()
+                                  width: screenWidth * 0.65)),//Google Sign-In Button
+
+                          SizedBox(height: screenHeight * 0.01),
+                          // SizedBox()
                           InkWell(
                               onTap: () async {
                                 setState(() {
                                   loading = true;
                                 });
-                                await _auth.signInAnonymously(); // Add 'await' to ensure the sign-in is completed before moving forward
-                                bool? isLogin = _auth.currentUser?.isAnonymous;
-                                if (isLogin != null && isLogin){
-                                  // Navigator.pushNamed(context, RoutesName.mainScreen);
-                                  setState(() {
-                                    loading=false;
-                                  });
-                                }
+                                await _auth.signInAnonymously(); // Signing In as Guest
                                 setState(() {
                                   loading=false;
                                 });
-                                Navigator.pushNamed(context, RoutesName.mainScreen,arguments: {
-                                  'username':'Guest!\n',
-                                });
-
+                                Navigator.pushNamed(context, RoutesName.mainScreen);
                               },
                               child:SignInButton(
                                   title: "Continue as Guest",
                                   logo: "assets/images/Guest.png",
                                   width: screenWidth * 0.65)),
+
                           SizedBox(height: screenHeight * 0.01), // SizedBox()
+
                           Row(
                             children: <Widget>[
                               Expanded(
@@ -200,7 +216,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ],
-                          ),
+                          ),// Divider
+
                           Form(
                             key: _formKey,
                             child: Padding(
@@ -277,7 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                             ),
-                          ),
+                          ),//Sign In with email and password
                           TextButton(
                             onPressed: () {
                               Navigator.pushNamed(context, RoutesName.forgotPassword);
@@ -291,11 +308,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
+                          ),//ForgotPassword Button
                           InkWell(
                             onTap: (){
                               if(_formKey.currentState!.validate()){
-                                login();
+                                signInWithEmailAndPass();
                               }
                             },
                               child: Container(
@@ -308,7 +325,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Center(
                                   child:Text("Continue",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 15),),
                                 ),
-                              ),),
+                              ),),//SignInButton
                         ],
                       ),
                     ),

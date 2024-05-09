@@ -10,21 +10,17 @@ class SplashServices {
   final auth = FirebaseAuth.instance;
 
 
-  void isLogin(BuildContext context) {
-
+  Future<void> isLogin(BuildContext context) async {
     final user = auth.currentUser;
     if (user != null) {
-      Navigator.pushReplacementNamed(context, RoutesName.mainScreen);}
-
-    // else if (user!.isAnonymous) {
-    //   Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
-    // }
-
+      Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
+      await userDataObj.getUserData();
+      // debugPrint(userDataObj.userData.toString());
+    }
     else {
       Navigator.pushReplacementNamed(context, RoutesName.login);
     }
-    listingsDataObj.fetchListingsData();
-    userDataObj.getUserData();
+    // await listingsDataObj.fetchListingsData();
   }
 
 

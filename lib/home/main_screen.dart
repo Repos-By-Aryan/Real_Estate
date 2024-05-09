@@ -8,8 +8,7 @@ import 'package:real_estate/home/home_screen.dart';
 import 'package:real_estate/search/search.dart';
 
 class MainScreen extends StatefulWidget {
-  dynamic data;
-  MainScreen({super.key,this.data});
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
